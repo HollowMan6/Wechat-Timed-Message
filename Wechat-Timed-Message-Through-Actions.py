@@ -25,6 +25,8 @@ if sckey:
         host = "https://sctapi.ftqq.com/"
         if openid != "0":
             user = "&openid=" + openid
+    title = urllib.parse.quote_plus(title).replace('\n', '\n\n')
+    message = urllib.parse.quote_plus(title).replace('\n', '\n\n')
     res = urllib.request.urlopen(host + sckey + ".send?text=" + title +
                         "&desp=" + message + user)
     result = json.loads(res.read().decode('utf-8'))
@@ -46,6 +48,8 @@ if pptoken:
     if not message:
         message = title
         title = ""
+    title = urllib.parse.quote_plus(title).replace('\n', '<br>')
+    message = urllib.parse.quote_plus(title).replace('\n', '<br>')
     res = urllib.request.urlopen(host + "send?token=" + pptoken + "&title=" + title +
                         "&content=" + message + "&template=html&topic=" + pptopic)
     result = json.loads(res.read().decode('utf-8'))

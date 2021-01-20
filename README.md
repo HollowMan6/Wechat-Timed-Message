@@ -61,7 +61,7 @@
 
 ---
 
-上述配置成功后，配置工作流文件，以[工作流1.yml](.github/workflows/1.yml)为模板，创建你自己的工作流或者在提供的工作流上进行修改。你可以任意更改name为无空格的英文字母和数字组合的字符串，cron为你想要发送消息的指定时间(你可以使用[crontab guru](https://crontab.guru/)进行cron表达式的调试，所有时间均为UTC时间，请进行时区换算)(因为Github方的原因，预定运行时间可能会有半小时左右的延迟)。然后创建一个或者两个Actions secrets，一个必须创建，其name为`TITLE[name]`（请将这里的`[name]`修改为workflow的name），value为要发送消息的标题，例如在提供的工作流中，这里的name为`TITLE1`；另一个为可选的，其name为`MSG[name]`，同理进行相应的替换，value为要发送消息的标题。这里消息的内容请不要包含换行或者特殊控制字符。
+上述配置成功后，配置工作流文件，以[工作流1.yml](.github/workflows/1.yml)为模板，创建你自己的工作流或者在提供的工作流上进行修改。你可以任意更改name为无空格的英文字母和数字组合的字符串，cron为你想要发送消息的指定时间(你可以使用[crontab guru](https://crontab.guru/)进行cron表达式的调试，所有时间均为UTC时间，请进行时区换算)(因为Github方的原因，预定运行时间可能会有半小时左右的延迟)。然后创建一个或者两个Actions secrets，一个必须创建，其name为`TITLE[name]`（请将这里的`[name]`修改为workflow的name），value为要发送消息的标题，例如在提供的工作流中，这里的name为`TITLE1`；另一个为可选的，其name为`MSG[name]`，同理进行相应的替换，value为要发送消息的标题。
 
 随后，按下图所示点击1，2，3，4的次序，你可以手动触发工作流的执行来进行测试。
    
@@ -78,3 +78,64 @@
 ***仅供测试使用，不可用于任何非法用途！***
 
 ***对于使用本代码所造成的一切不良后果，本人将不负任何责任！***
+
+# Send timed message to Wechat through Github Actions workflows
+
+### Please **★Star** if you think it's great!
+
+[Python library dependency](../../network/dependencies)
+
+[Workflows](.github/workflows/autoreport.yml)
+
+## Usage
+
+you can fork this repository first, and then create Actions Secrets and set related settings in your forked repository (click in the order of 1, 2 and 3 as shown in the figure below).
+
+![](img/secrets.png)
+
+You can choose one or more of the following three push platforms to receive pushed messages:
+
+### PushPlus(Recommended)
+
+First [log into pushplus](https://pushplus.hxtrip.com/login), and then find your token in pushplus website, create a actions secret with the name of `PPTOKEN` and the value of your token value, and then one-to-one push the related information of automatic reporting results.
+
+If you need to push the related information of automatic reporting results to multiple Wechat accounts, that is, one-to-many push, you need to create a group, write down the group code, and then create an actions secret with the name of `PPTOPIC` and the value of your group code.
+
+![](https://pushplus.hxtrip.com/doc/img/c1.png)
+
+### ServerChan
+
+We Use [Server Chan](http://sc.ftqq.com/) to realize its functionality. For its configuration method, please refer to its documentation (In Chinese).
+
+Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information of the automatic health reporting results for you.
+
+*Effect Graphs*：
+
+Pushing Effect：
+![](img/ServerChan.jpg)
+
+Details：
+![](img/ServerChanMessage.jpg)
+
+### ServerChan Testing Subscription Version
+
+If you want to use [ServerChan Testing Subscription Version](https://sct.ftqq.com/), please create/modify the Actions secret with the Name `SERVERCHANSCKEY` and the value [your sendkey value](https://sct.ftqq.com/sendkey). In addition, create a Actions secret with Name as `OPENID`, if the value is `0`, it is only send to yourself. Otherwise, set the value to be the specified user's Wechat openid who subscribed the Testing Subscription account, then it will send it to the designated user and yourself at the same time.
+
+If you need to switch back to normal SeverChan, please delete the `OPENID` actions secret.
+
+After the above configuration is successful, configure the workflow file and use [工作流1.yml](.github/workflows/1.yml) as the template to create your own workflow or modify the workflow provided. You can change the name into a string of letters or numbers without spaces. Cron is the specified time when you want to send a message (you can use [crontab guru](https://crontab.guru/) For cron expression debugging, all the time zone is in UTC, please convert the time zone into yours. (Due to the mechanism realized by Github, there may exist a delay for about half an hour.) Then create one or two actions Secrets: one must be created, its name is`TITLE[name]`(please change `[name]` here into the name of workflow), and value is the title of the message to be sent. For example, in the provided workflow, the name is `TITLE1`; the other is optional, its name is `MSG[name]`, and the corresponding replacement is carried out, and value is the title of the message to be sent.
+
+Then, click in the order of 1, 2, 3 and 4 as shown in the figure below. You can manually trigger the execution of workflow to test.
+
+![](img/workflow.png)
+
+Click any running record, and then click in the order of 1 and 2 as shown in the figure below. You can see the running record and error description.
+![](img/run.png)
+
+If the workflow fails due to some errors, GitHub will automatically send an email to remind the workflow of failure.
+
+**Warning**:
+
+***For TESTING ONLY, not for any ILLEGAL USE!***
+
+***I will not be responsible for any adverse consequences caused by using this code.***
