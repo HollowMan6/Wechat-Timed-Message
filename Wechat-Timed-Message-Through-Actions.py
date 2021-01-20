@@ -26,7 +26,7 @@ if sckey:
         if openid != "0":
             user = "&openid=" + openid
     res = urllib.request.urlopen(host + sckey + ".send?text=" + title +
-                        "&desp=" + message.replace('\r', '').replace('\n', '\n\n') + user)
+                        "&desp=" + message.replace('\n', '\n\n') + user)
     result = json.loads(res.read().decode('utf-8'))
     if not openid and result['errno'] == 0:
         print("成功通过Sever酱将结果通知给用户!")
@@ -47,7 +47,7 @@ if pptoken:
         message = title
         title = ""
     res = urllib.request.urlopen(host + "send?token=" + pptoken + "&title=" + title +
-                        "&content=" + message.replace('\r', '').replace('\n', '<br>') + "&template=html&topic=" + pptopic)
+                        "&content=" + message.replace('\n', '<br>') + "&template=html&topic=" + pptopic)
     result = json.loads(res.read().decode('utf-8'))
     if result['code'] == 200:
         print("成功通过PushPlus将结果通知给相关用户!")

@@ -15,7 +15,7 @@ jobs:
           uses: actions/setup-python@v2
           with:
             python-version: '3.9'
-        - name: 'Error logging and Notifying Using ServerChan or PushPlus'
+        - name: 'Send Timed Message to Wechat'
           env:
             SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
             OPENID: ${{ secrets.OPENID }}
@@ -23,4 +23,4 @@ jobs:
             PPTOPIC: ${{ secrets.PPTOPIC }}
             TITLE: ${{ secrets[format('TITLE{0}', github.workflow)] }}
             MSG: ${{ secrets[format('MSG{0}', github.workflow)] }}
-          run: python Wechat-Timed-Message-Through-Actions.py
+          run: echo $${{ env.TITLE }} >> infomation.txt && infomation.txt && cat python Wechat-Timed-Message-Through-Actions.py
