@@ -45,14 +45,6 @@
 
 然后，你只需要创建一个Name为`SERVERCHANSCKEY`，value为[你的SCKEY调用代码值](http://sc.ftqq.com/?c=code)的Actions secret即可自动让仓库的工作流通过Server酱为你推送自动打卡结果相关信息。
 
-*效果示意*：
-
-推送效果：
-![](img/ServerChan.jpg)
-
-点开详情：
-![](img/ServerChanMessage.jpg)
-
 ### Server酱测试号版
 
 如果要使用[Server酱测试号版](https://sct.ftqq.com/)，请创建一个/修改Name为`SERVERCHANSCKEY`，value为[你的SendKey值](https://sct.ftqq.com/sendkey)的Actions secret。另外创建一个Name为`OPENID`的Actions secret，如果value值为`0`则是通过公众号仅发给自己。否则将value值设定为关注你测试公众号的那个用户的微信号openid，这时将发给自己的同时还会发送给那个指定用户。
@@ -108,14 +100,6 @@ If you need to push the related information of automatic reporting results to mu
 We Use [Server Chan](http://sc.ftqq.com/) to realize its functionality. For its configuration method, please refer to its documentation (In Chinese).
 
 Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information of the automatic health reporting results for you.
-
-*Effect Graphs*：
-
-Pushing Effect：
-![](img/ServerChan.jpg)
-
-Details：
-![](img/ServerChanMessage.jpg)
 
 ### ServerChan Testing Subscription Version
 
