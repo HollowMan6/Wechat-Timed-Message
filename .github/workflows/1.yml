@@ -3,7 +3,7 @@ name: '1'
 on:
   workflow_dispatch:  # Allow manual triggers
   schedule:
-    - cron: '0 2 20 * *' # Schedule on CST 10 during 20th day of every month.
+    - cron: '0 2 21 * *' # Schedule on CST 10 during 20th day of every month.
 
 jobs:
   bot:
@@ -21,6 +21,6 @@ jobs:
             OPENID: ${{ secrets.OPENID }}
             PPTOKEN: ${{ secrets.PPTOKEN }}
             PPTOPIC: ${{ secrets.PPTOPIC }}
-            TITLE: ${{ secrets.TITLE$name }}
-            MSG: ${{ secrets.MSG$name }}
+            TITLE: ${{ name }}
+            MSG: ${{ name }}
           run: python Wechat-Timed-Message-Through-Actions.py
