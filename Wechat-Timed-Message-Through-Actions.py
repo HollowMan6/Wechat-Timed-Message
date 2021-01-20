@@ -3,8 +3,7 @@
 # by 'hollowman6' from Lanzhou University(兰州大学)
 
 import os
-import sys
-import requests
+import urllib.request
 import json
 import urllib.parse
 
@@ -26,9 +25,9 @@ if sckey:
         host = "https://sctapi.ftqq.com/"
         if openid != "0":
             user = "&openid=" + openid
-    res = requests.get(host + sckey + ".send?text=" + title +
+    res = urllib.request.urlopen(host + sckey + ".send?text=" + title +
                         "&desp=" + message.replace('\n', '\n\n') + user)
-    result = json.loads(res.text)
+    result = json.loads(res.read().decode('utf-8'))
     if not openid and result['errno'] == 0:
         print("成功通过Sever酱将结果通知给用户!")
     elif openid and result['data']['errno'] == 0:
@@ -37,7 +36,7 @@ if sckey:
         else:
             print("成功通过Sever酱将结果通知到测试公众号的指定关注用户和创建用户!")
     else:
-        errorServerChan = "Server酱推送错误: " + res.text
+        errorServerChan = "Server酱推送错误: " + res.read().decode('utf-8')
 else:
     print("未设置SERVERCHANSCKEY，尝试使用PushPlus...")
 
@@ -47,13 +46,13 @@ if pptoken:
     if not message:
         message = title
         title = ""
-    res = requests.get(host + "send?token=" + pptoken + "&title=" + title +
+    res = urllib.request.urlopen(host + "send?token=" + pptoken + "&title=" + title +
                         "&content=" + message.replace('\n', '<br>') + "&template=html&topic=" + pptopic)
-    result = json.loads(res.text)
+    result = json.loads(res.read().decode('utf-8'))
     if result['code'] == 200:
         print("成功通过PushPlus将结果通知给相关用户!")
     else:
-        raise Exception("PushPlus推送错误: " + res.text +
+        raise Exception("PushPlus推送错误: " + res.read().decode('utf-8') +
                         "\n" + errorServerChan)
 else:
     print("未设置PPTOKEN！")
