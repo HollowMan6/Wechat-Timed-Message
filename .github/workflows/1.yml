@@ -21,6 +21,6 @@ jobs:
             OPENID: ${{ secrets.OPENID }}
             PPTOKEN: ${{ secrets.PPTOKEN }}
             PPTOPIC: ${{ secrets.PPTOPIC }}
-            TITLE: ${{ secrets.TITLE${{ name }} }}
-            MSG: ${{ secrets.MSG${{ name }} }}
+            TITLE: ${{ secrets.TITLE$name }}
+            MSG: ${{ secrets.MSG$name }}
           run: python Wechat-Timed-Message-Through-Actions.py
