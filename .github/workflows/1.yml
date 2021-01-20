@@ -23,4 +23,4 @@ jobs:
             PPTOPIC: ${{ secrets.PPTOPIC }}
             TITLE: ${{ secrets[format('TITLE{0}', github.workflow)] }}
             MSG: ${{ secrets[format('MSG{0}', github.workflow)] }}
-          run: echo ${{ TITLE }} && python Wechat-Timed-Message-Through-Actions.py
+          run: echo ${{ format('TITLE{0}', github.workflow) }} && python Wechat-Timed-Message-Through-Actions.py
