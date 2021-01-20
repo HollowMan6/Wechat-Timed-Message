@@ -1,0 +1,26 @@
+name: '1'
+
+on:
+  workflow_dispatch:  # Allow manual triggers
+  schedule:
+    - cron: '0 2 20 * *' # Schedule on CST 10 during 20th day of every month.
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+        - name: 'Checkout codes'
+          uses: actions/checkout@v2
+        - name: 'Set up Python'
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.9'
+        - name: 'Error logging and Notifying Using ServerChan or PushPlus'
+          env:
+            SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
+            OPENID: ${{ secrets.OPENID }}
+            PPTOKEN: ${{ secrets.PPTOKEN }}
+            PPTOPIC: ${{ secrets.PPTOPIC }}
+            TITLE: ${{ secrets.TITLE${{ name }} }}
+            MSG: ${{ secrets.MSG${{ name }} }}
+          run: python Wechat-Timed-Message-Through-Actions.py
