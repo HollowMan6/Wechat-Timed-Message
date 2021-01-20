@@ -27,6 +27,8 @@
 
 你需要fork本仓库，之后在你fork的仓库中创建相关Actions Secret并进行相关设置(按下图所示点击1，2，3的次序，即可进入新建Actions secrets的界面):
 
+![](img/secrets.png)
+
 你可以从以下三个推送平台中任选一个或多个来接受推送的消息：
 
 ### PushPlus(推荐)
@@ -59,7 +61,7 @@
 
 ---
 
-上述配置成功后，配置工作流文件，以[工作流1.yml](.github/workflows/1.yml)为模板，创建你自己的工作流或者在提供的工作流上进行修改。你可以任意更改name为无空格的英文字母和数字组合的字符串，cron为你想要发送消息的指定时间(你可以使用[crontab guru](https://crontab.guru/)进行cron表达式的调试，所有时间均为UTC时间，请进行时区换算)(因为Github方的原因，预定运行时间可能会有半小时左右的延迟)。然后创建一个或者两个Actions secrets，一个必须创建，其name为`TITLE[name]`（请将这里的`[name]`修改为workflow的name），value为要发送消息的标题，例如在提供的工作流中，这里的name为`TITLE1`；另一个为可选的，其name为`MSG[name]`，同理进行相应的替换，value为要发送消息的标题。
+上述配置成功后，配置工作流文件，以[工作流1.yml](.github/workflows/1.yml)为模板，创建你自己的工作流或者在提供的工作流上进行修改。你可以任意更改name为无空格的英文字母和数字组合的字符串，cron为你想要发送消息的指定时间(你可以使用[crontab guru](https://crontab.guru/)进行cron表达式的调试，所有时间均为UTC时间，请进行时区换算)(因为Github方的原因，预定运行时间可能会有半小时左右的延迟)。然后创建一个或者两个Actions secrets，一个必须创建，其name为`TITLE[name]`（请将这里的`[name]`修改为workflow的name），value为要发送消息的标题，例如在提供的工作流中，这里的name为`TITLE1`；另一个为可选的，其name为`MSG[name]`，同理进行相应的替换，value为要发送消息的标题。这里消息的内容请不要包含换行或者特殊控制字符。
 
 随后，按下图所示点击1，2，3，4的次序，你可以手动触发工作流的执行来进行测试。
    
