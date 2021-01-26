@@ -2,6 +2,10 @@ name: '1' # change here for `name`
 
 on:
   workflow_dispatch:
+    inputs:
+      delays:
+        description: 'Delayed time (Optional) 可选延迟时间'
+        required: false
   schedule:
     - cron: '0 2 21 * *' # change here for `cron`; Schedule on CST 10 during 20th day of every month.
 
@@ -15,6 +19,9 @@ jobs:
           uses: actions/setup-python@v2
           with:
             python-version: '3.9'
+        - name: Time wait ${{ github.event.inputs.delays }}
+          if: ${{ github.event.inputs.delays != '' }}
+          run: sleep ${{ github.event.inputs.delays }}
         - name: 'Send Timed Message to Wechat'
           env:
             SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
@@ -24,3 +31,12 @@ jobs:
             TITLE: ${{ secrets[format('TITLE{0}', github.workflow)] }}
             MSG: ${{ secrets[format('MSG{0}', github.workflow)] }}
           run: python Wechat-Timed-Message-Through-Actions.py
+        - name: 'Re-run workflow if failed and GPATOKEN set'
+          env:
+            GPATOKEN: ${{ secrets.GPATOKEN }}
+          if: ${{ failure() && (env.GPATOKEN != '') }}
+          uses: benc-uk/workflow-dispatch@v1
+          with:
+            workflow: '1'
+            token: ${{ secrets.GPATOKEN }}
+            inputs: '{ "delays": "30m" }'

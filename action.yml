@@ -1,0 +1,34 @@
+
+name: 'Send Message to Wechat'
+description: 'Send Message to Wechat.(向微信推送消息)'
+
+inputs:
+  TITLE:
+    description: 'Your Message Title(消息标题)'
+    required: true
+  MSG:
+    description: 'Your Message Content(消息主体)'
+    required: false
+  DELAYS:
+    description: 'Delay time for running(设置发消息时间延迟)'
+    required: false
+  SERVERCHANSCKEY:
+    description: 'Server酱 SCKEY'
+    required: false
+  OPENID:
+    description: 'Server酱测试号版 微信公众号用户OpenID'
+    required: false
+  PPTOKEN:
+    description: 'PushPlus Token'
+    required: false
+  PPTOPIC:
+    description: 'PushPlus Topic(群组编码)'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  color: green
+  icon: send

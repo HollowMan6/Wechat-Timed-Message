@@ -14,6 +14,7 @@
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/HollowMan6/Wechat-Timed-Message-Through-Actions.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message-Through-Actions/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HollowMan6/Wechat-Timed-Message-Through-Actions.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message-Through-Actions/context:python)
+[![](https://images.microbadger.com/badges/image/hollowman6/send-message-to-wechat.svg)](https://microbadger.com/images/hollowman6/send-message-to-wechat)
 
 (English version is down below)
 
@@ -33,9 +34,9 @@
 
 ### PushPlus(推荐)
 
-[登录PushPlus](https://pushplus.hxtrip.com/login)，然后在pushplus网站中找到您的token，创建一个Name为`PPTOKEN`，value为您的token值的Actions secret，就可以进行一对一推送自动打卡结果相关信息。
+[登录PushPlus](https://pushplus.hxtrip.com/login)，然后在pushplus网站中找到您的token，创建一个Name为`PPTOKEN`，value为您的token值的Actions secret，就可以进行一对一推送信息。
 
-如果需要对多个账号推送自动打卡结果相关信息，即一对多推送，还需要另外新建一个群组，记下群组编码，然后创建一个Name为`PPTOPIC`，value为您的群组编码的Actions secret。
+如果需要对多个账号推送信息，即一对多推送，还需要另外新建一个群组，记下群组编码，然后创建一个Name为`PPTOPIC`，value为您的群组编码的Actions secret。
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
@@ -43,7 +44,7 @@
 
 如使用[Server酱](http://sc.ftqq.com/)来实现，它的配置方法请参考其说明文档。
 
-然后，你只需要创建一个Name为`SERVERCHANSCKEY`，value为[你的SCKEY调用代码值](http://sc.ftqq.com/?c=code)的Actions secret即可自动让仓库的工作流通过Server酱为你推送自动打卡结果相关信息。
+然后，你只需要创建一个Name为`SERVERCHANSCKEY`，value为[你的SCKEY调用代码值](http://sc.ftqq.com/?c=code)的Actions secret即可自动让仓库的工作流通过Server酱为你推送消息。
 
 ### Server酱测试号版
 
@@ -65,6 +66,75 @@
 
 如果某次因为某些因素工作流运行失败，GitHub会自动发邮件提醒工作流运行失败。
 
+**新**：增加可选的遇到发送消息失败的情况，自动重启工作流，并等待一段时间后再次发送消息。如果你需要这个功能，则请创建一个Personal Access Token, [获取教程](https://docs.github.com/cn/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token)(第7步令牌的作用域权限你只需要选中workflow这一栏即可)。然后创建一个Name为`GPATOKEN`，value为你的令牌值的Actions Secret。
+
+默认再次发送消息等待时间为30分钟，如果你有需要可以将[这里](
+https://github.com/HollowMan6/Wechat-Timed-Message-Through-Actions/blob/main/.github/workflows/1.yml#L42)的`30m`替换为你想要的数值，这里的时间遵循Linux sleep 函数对应时间语法：一个数字后接 `s` 对应秒, `m` 对应分钟等。
+
+如果是因为本仓库程序本身因为失效而导致的报错，你可以取消正在运行中的工作流从而终止这一循环。
+
+## 自行配置工作流
+
+你可以自行创建一个仓库并自行配置工作流进行使用，[示例工作流文件](.github/workflows/1-docker.yml)
+
+### 输入
+
+#### 必须
+
+* TITLE: 消息标题
+
+#### 可选
+
+* MSG: 消息主体
+* DELAYS: 设置发送消息时间延迟
+* SERVERCHANSCKEY: Server酱 SCKEY
+* OPENID: Server酱测试号版 微信公众号用户OpenID
+* PPTOKEN: PushPlus Token
+* PPTOPIC: PushPlus 群组编码
+
+### 示例
+
+```yaml
+- name: 'Send Message to Wechat'
+  uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+  with:
+    DELAYS: ${{ github.event.inputs.delays }}
+    SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
+    OPENID: ${{ secrets.OPENID }}
+    PPTOKEN: ${{ secrets.PPTOKEN }}
+    PPTOPIC: ${{ secrets.PPTOPIC }}
+    TITLE: ${{ secrets.TITLE }}
+    MSG: ${{ secrets.MSG }}
+```
+
+## Docker
+
+Docker Hub: https://hub.docker.com/r/hollowman6/send-message-to-wechat
+
+如果你需要通过Docker运行，只需要将上述Actions Secret变量名和值分别设置为环境变量(另外增加一个DELAYS为发送消息等待时间，值同[使用方法](#使用方法)步骤6中要求)，然后执行下述命令即可：
+```bash
+docker run -it \
+    -e CARDID=$CARDID \
+    -e PASSWORD=$PASSWORD \
+    -e DELAYS=$DELAYS \
+    -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
+    -e OPENID=$OPENID \
+    -e PPTOKEN=$PPTOKEN \
+    -e PPTOPIC=$PPTOPIC \
+    -e DELAYS=$DELAYS \
+    hollowman6/send-message-to-wechat
+```
+
+**创建**
+
+```bash
+docker build -t hollowman6/send-message-to-wechat .
+```
+
+该Docker镜像也可以在云服务器中结合Kubernetes的CronJob运行等，可能性无限多。
+
+*注:* 如要在自己的Linux服务器上使用crontab执行定时任务来进行自动发送消息，推荐使用[Docker](#docker)。你也可以clone本仓库，安装好相关Python依赖后改编[entrypoint.sh](entrypoint.sh)文件中python程序的路径，将上述Actions Secret变量名和值分别设置为系统环境变量(另外增加一个DELAYS为发送消息等待时间，值同[使用方法](#使用方法)步骤6中要求)，即可运行。
+
 **警告**：
 
 ***仅供测试使用，不可用于任何非法用途！***
@@ -77,7 +147,7 @@
 
 [Python library dependency](../../network/dependencies)
 
-[Workflows](.github/workflows/autoreport.yml)
+[Workflows](.github/workflows)
 
 ## Usage
 
@@ -89,9 +159,9 @@ You can choose one or more of the following three push platforms to receive push
 
 ### PushPlus(Recommended)
 
-First [log into pushplus](https://pushplus.hxtrip.com/login), and then find your token in pushplus website, create a actions secret with the name of `PPTOKEN` and the value of your token value, and then one-to-one push the related information of automatic reporting results.
+First [log into pushplus](https://pushplus.hxtrip.com/login), and then find your token in pushplus website, create a actions secret with the name of `PPTOKEN` and the value of your token value, and then one-to-one push the related information results.
 
-If you need to push the related information of automatic reporting results to multiple Wechat accounts, that is, one-to-many push, you need to create a group, write down the group code, and then create an actions secret with the name of `PPTOPIC` and the value of your group code.
+If you need to push the related information to multiple Wechat accounts, that is, one-to-many push, you need to create a group, write down the group code, and then create an actions secret with the name of `PPTOPIC` and the value of your group code.
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
@@ -99,13 +169,15 @@ If you need to push the related information of automatic reporting results to mu
 
 We Use [Server Chan](http://sc.ftqq.com/) to realize its functionality. For its configuration method, please refer to its documentation (In Chinese).
 
-Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information of the automatic health reporting results for you.
+Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information for you.
 
 ### ServerChan Testing Subscription Version
 
 If you want to use [ServerChan Testing Subscription Version](https://sct.ftqq.com/), please create/modify the Actions secret with the Name `SERVERCHANSCKEY` and the value [your sendkey value](https://sct.ftqq.com/sendkey). In addition, create a Actions secret with Name as `OPENID`, if the value is `0`, it is only send to yourself. Otherwise, set the value to be the specified user's Wechat openid who subscribed the Testing Subscription account, then it will send it to the designated user and yourself at the same time.
 
 If you need to switch back to normal SeverChan, please delete the `OPENID` actions secret.
+
+---
 
 After the above configuration is successful, configure the workflow file and use [工作流1.yml](.github/workflows/1.yml) as the template to create your own workflow or modify the workflow provided. You can change the name into a string of letters or numbers without spaces. Cron is the specified time when you want to send a message (you can use [crontab guru](https://crontab.guru/) For cron expression debugging, all the time zone is in UTC, please convert the time zone into yours. (Due to the mechanism realized by Github, there may exist a delay for about half an hour.) Then create one or two actions Secrets: one must be created, its name is`TITLE[name]`(please change `[name]` here into the name of workflow), and value is the title of the message to be sent. For example, in the provided workflow, the name is `TITLE1`; the other is optional, its name is `MSG[name]`, and the corresponding replacement is carried out, and value is the title of the message to be sent.
 
@@ -117,6 +189,76 @@ Click any running record, and then click in the order of 1 and 2 as shown in the
 ![](img/run.png)
 
 If the workflow fails due to some errors, GitHub will automatically send an email to remind the workflow of failure.
+
+**NEW**: Add the optional option to restart the workflow automatically in case of Send Message to Wechat in failure, and wait for a period of time to re-run workflow again automatically. If you need this, please create a Personal Access Token, [Here's Guides to create](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token)(In step 7 scopes or permissions, you only need to select the `workflow` row). Then create an Actions Secret with the name of `GPATOKEN` and the value with your token.
+
+The default waiting time is 30 minutes. You can replace `30m` [here](
+https://github.com/HollowMan6/Wechat-Timed-Message-Through-Actions/blob/main/.github/workflows/1.yml#L42) with the time you want. The time here follows the Linux sleep syntax for time units: a number followed by `s` for seconds, `m` for minutes, etc.
+
+If the error is caused by the repository program itself, you can cancel the running workflow to terminate the loop.
+
+
+## Self-Configure Workflow
+
+You can create your own repository and configure your own workflow to use, [Example Workflow YAML File](.github/workflows/1-docker.yml)
+
+### Input
+
+#### Required
+
+* TITLE: Your Message Title
+
+#### Optional
+
+* MSG: Your Message Content
+* SERVERCHANSCKEY: ServerChan SCKEY
+* OPENID: ServerChan Testing Subscription Version Testing Subscription account User OpenID
+* PPTOKEN: PushPlus Token
+* PPTOPIC: PushPlus Topic
+
+### Example
+
+```yaml
+- name: 'Send Message to Wechat'
+  uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+  with:
+    DELAYS: ${{ github.event.inputs.delays }}
+    SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
+    OPENID: ${{ secrets.OPENID }}
+    PPTOKEN: ${{ secrets.PPTOKEN }}
+    PPTOPIC: ${{ secrets.PPTOPIC }}
+    TITLE: ${{ secrets.TITLE }}
+    MSG: ${{ secrets.MSG }}
+```
+
+## Docker
+
+Docker Hub: https://hub.docker.com/r/hollowman6/send-message-to-wechat
+
+If you need to run through docker, just set the above Actions Secrets name and value as environment variables (In addition, add a DELAYS as the waiting time, and the value is the same requirement as that in step 6 of [usage](#usage)), and then execute the following command:
+
+```bash
+docker run -it \
+    -e CARDID=$CARDID \
+    -e PASSWORD=$PASSWORD \
+    -e DELAYS=$DELAYS \
+    -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
+    -e OPENID=$OPENID \
+    -e PPTOKEN=$PPTOKEN \
+    -e PPTOPIC=$PPTOPIC \
+    -e DELAYS=$DELAYS \
+    hollowman6/send-message-to-wechat
+```
+
+**Build**
+
+```bash
+docker build -t hollowman6/send-message-to-wechat .
+```
+
+The docker image here can also be runned in combination with Kubernetes' CronJob in the Cloud Clusters etc. THere're unlimited possibilities.
+
+*PS:* If you want to use crontab on your own Linux server to execute the send message, I recommend using [docker](#docker), otherwise please clone this repository and after installing relevant Python dependencies, adapt the path of the python program in [entrypoint.sh](entrypoint.sh). Set the Actions Aecrets name and value mentioned above as the environment variable respectively (In addition, add a DELAYS as the waiting time, and the value is the same requirement as that in step 6 of [usage](#usage)) to run.
 
 **Warning**:
 

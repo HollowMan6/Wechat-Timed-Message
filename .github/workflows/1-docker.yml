@@ -1,0 +1,34 @@
+name: 'Docker Version - 1'
+    
+on:
+  workflow_dispatch:  # Allow manual triggers
+    inputs:
+      delays:
+        description: 'Delayed time (Optional) 可选延迟时间'
+        required: false
+# schedule:
+#   - cron: '0 2 21 * *' # change here for `cron`; Schedule on CST 10 during 20th day of every month.
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+        - name: 'Send Message to Wechat'
+          uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+          with:
+            DELAYS: ${{ github.event.inputs.delays }}
+            SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
+            OPENID: ${{ secrets.OPENID }}
+            PPTOKEN: ${{ secrets.PPTOKEN }}
+            PPTOPIC: ${{ secrets.PPTOPIC }}
+            TITLE: ${{ secrets.TITLE }}
+            MSG: ${{ secrets.MSG }}
+        - name: 'Re-run workflow if failed and GPATOKEN set'
+          env:
+            GPATOKEN: ${{ secrets.GPATOKEN }}
+          if: ${{ failure() && (env.GPATOKEN != '') }}
+          uses: benc-uk/workflow-dispatch@v1
+          with:
+            workflow: 'Docker Version - 1'
+            token: ${{ secrets.GPATOKEN }}
+            inputs: '{ "delays": "30m" }'
