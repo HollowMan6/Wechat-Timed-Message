@@ -16,6 +16,8 @@ do
 done
 if [ -f "tmpt" ]; then
     command=$command" --from-file=title=tmpt"
+else
+    command=$command" --from-literal=title="
 fi
 echo "-msg(Empty line to end):"
 while read content
@@ -29,6 +31,8 @@ do
 done
 if [ -f "tmpm" ]; then
     command=$command" --from-file=msg=tmpm"
+else
+    command=$command" --from-literal=msg="
 fi
 
 secrets=("serverchansckey" "openid" "pptoken" "pptopic")
