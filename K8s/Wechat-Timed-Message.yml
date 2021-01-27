@@ -3,14 +3,14 @@ kind: ConfigMap
 metadata:
   name: wechat-message-delays
 data:
-  delays: ""
+  delays: "30m"
 
 ---
 
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: wechat-timed-message-through-actions
+  name: wechat-timed-message
 spec:
   schedule: "0 2 21 * *"  # change here for `cron`; Schedule on CST 10 during 20th day of every month.
   jobTemplate:
@@ -18,7 +18,7 @@ spec:
       template:
         spec:
           containers:
-          - name: wechat-timed-message-through-actions
+          - name: wechat-timed-message
             image: hollowman6/send-message-to-wechat:latest
             env:
               - name: DELAYS

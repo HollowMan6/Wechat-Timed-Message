@@ -51,7 +51,7 @@ if [ -f "tmpm" ]; then
 fi
 
 # Create cronJob
-kubectl create -f Wechat-Timed-Message-Through-Actions.yml
+kubectl create -f Wechat-Timed-Message.yml
 
 # Check Details
-kubectl get secret/wechat-message-secret configmap/wechat-message-delays cronjob/wechat-timed-message-through-actions
+kubectl get secret/wechat-message-secret configmap/wechat-message-delays cronjob/wechat-timed-message

@@ -142,9 +142,9 @@ docker build -t hollowman6/send-message-to-wechat .
 
 参考配置文件见[K8s](K8s), 只要运行[create.sh](K8s/create.sh)即可创建相关Actions Secret、ConfigMap和CronJob。
 
-你可以[更改这里来设定DELAYS变量](K8s/Wechat-Timed-Message-Through-Actions.yml#L6)
+你可以[更改这里来设定DELAYS变量](K8s/Wechat-Timed-Message.yml#L6)
 
-还可以[更改这里来设定Cron表达式](K8s/Wechat-Timed-Message-Through-Actions.yml#L15)
+还可以[更改这里来设定Cron表达式](K8s/Wechat-Timed-Message.yml#L15)
 
 **警告**：
 
@@ -278,9 +278,9 @@ The docker image here can also be runned in combination with Kubernetes' CronJob
 
 You can refer to the configuration file [K8s](K8s).Also create the relevant Secrets ConfigMap and CronJob by running [create.sh](K8s/create.sh)
 
-You can also [change here to set `DELAYS` Variable](K8s/Wechat-Timed-Message-Through-Actions.yml#L6)
+You can also [change here to set `DELAYS` Variable](K8s/Wechat-Timed-Message.yml#L6)
 
-Also [change here to set Cron expression](K8s/Wechat-Timed-Message-Through-Actions.yml#L15)
+Also [change here to set Cron expression](K8s/Wechat-Timed-Message.yml#L15)
 
 **Warning**:
 
