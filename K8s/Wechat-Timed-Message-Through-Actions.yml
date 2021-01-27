@@ -56,4 +56,10 @@ spec:
                   secretKeyRef:
                     name: wechat-message-secret
                     key: pptopic
+            volumeMounts:
+            - mountPath: /cache
+              name: send-delays-marking
+          volumes:
+          - name: send-delays-marking
+            emptyDir: {}
           restartPolicy: OnFailure

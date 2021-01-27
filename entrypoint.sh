@@ -14,8 +14,15 @@ fi
 # Main Program Execution
 if [ ! -z $DELAYS ]
 then
-    echo "---Wait for $DELAYS---"
-    sleep $DELAYS
+    # Support delays after a failed pod restart in Kubernetes by creating mark `/cache/runned`
+    if [ ! -d "/cache" ] || [ -f "/cache/runned" ]
+    then
+        echo "---Wait for $DELAYS---"
+        sleep $DELAYS
+    elif [ -d "/cache" ]
+    then
+        touch "/cache/runned"
+    fi
 fi
 echo "---Send Message to Wechat---"
 python /Wechat-Timed-Message-Through-Actions.py
