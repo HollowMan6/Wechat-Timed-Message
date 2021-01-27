@@ -4,12 +4,6 @@
 echo "---Enter your Actions Secrets, empty if it doesn't exists---"
 command="kubectl create secret generic wechat-message-secret"
 
-if [ -f "tmpt" ]; then
-    rm tmpt
-fi
-if [ -f "tmpm" ]; then
-    rm tmpm
-fi
 echo "-title(Empty line to end):"
 while read content
 do
@@ -44,6 +38,13 @@ do
     command=$command" --from-literal="$secret"="$content
 done
 $command
+
+if [ -f "tmpt" ]; then
+    rm tmpt
+fi
+if [ -f "tmpm" ]; then
+    rm tmpm
+fi
 
 # Create cronJob
 kubectl create -f Wechat-Timed-Message-Through-Actions.yml
