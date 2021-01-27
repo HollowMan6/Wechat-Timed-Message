@@ -24,6 +24,8 @@
 
 [工作流存放文件夹](.github/workflows)
 
+支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab运行](#crontab)，[Docker运行](#docker)，[Kubernetes运行](#kubernetes)等。
+
 ## 使用方法
 
 你需要fork本仓库，之后在你fork的仓库中创建相关Actions Secret并进行相关设置(按下图所示点击1，2，3的次序，即可进入新建Actions secrets的界面):
@@ -132,7 +134,17 @@ docker build -t hollowman6/send-message-to-wechat .
 
 该Docker镜像也可以在云服务器中结合Kubernetes的CronJob运行等，可能性无限多。
 
+## CronTab
+
 *注:* 如要在自己的Linux服务器上使用crontab执行定时任务来进行自动发送消息，推荐使用[Docker](#docker)。你也可以clone本仓库，安装好相关Python依赖后改编[entrypoint.sh](entrypoint.sh)文件中python程序的路径，将上述Actions Secret变量名和值分别设置为系统环境变量(另外增加一个DELAYS为发送消息等待时间，值同[使用方法](#使用方法)步骤6中要求)，即可运行。
+
+## Kubernetes
+
+参考配置文件见[K8s](K8s), 只要运行[create.sh](K8s/create.sh)即可创建相关Actions Secret、ConfigMap和CronJob。
+
+你可以[更改这里来设定DELAYS变量](K8s/Wechat-Timed-Message-Through-Actions.yml#L6)
+
+还可以[更改这里来设定Cron表达式](K8s/Wechat-Timed-Message-Through-Actions.yml#L15)
 
 **警告**：
 
@@ -147,6 +159,8 @@ docker build -t hollowman6/send-message-to-wechat .
 [Python library dependency](../../network/dependencies)
 
 [Workflows](.github/workflows)
+
+Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab](#crontab)，[run with Docker](#docker)，[run with Kubernetes](#kubernetes) etc.
 
 ## Usage
 
@@ -256,7 +270,17 @@ docker build -t hollowman6/send-message-to-wechat .
 
 The docker image here can also be runned in combination with Kubernetes' CronJob in the Cloud Clusters etc. THere're unlimited possibilities.
 
+## CronTab
+
 *PS:* If you want to use crontab on your own Linux server to execute the send message, I recommend using [docker](#docker), otherwise please clone this repository and after installing relevant Python dependencies, adapt the path of the python program in [entrypoint.sh](entrypoint.sh). Set the Actions Aecrets name and value mentioned above as the environment variable respectively (In addition, add a DELAYS as the waiting time, and the value is the same requirement as that in step 6 of [usage](#usage)) to run.
+
+## Kubernetes
+
+You can refer to the configuration file [K8s](K8s).Also create the relevant Secrets ConfigMap and CronJob by running [create.sh](K8s/create.sh)
+
+You can also [change here to set `DELAYS` Variable](K8s/Wechat-Timed-Message-Through-Actions.yml#L6)
+
+Also [change here to set Cron expression](K8s/Wechat-Timed-Message-Through-Actions.yml#L15)
 
 **Warning**:
 

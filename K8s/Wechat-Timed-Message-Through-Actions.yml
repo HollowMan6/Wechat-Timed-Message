@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wechat-message-delays
+data:
+  delays: ""
+
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: wechat-timed-message-through-actions
+spec:
+  schedule: "0 2 21 * *"  # change here for `cron`; Schedule on CST 10 during 20th day of every month.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: wechat-timed-message-through-actions
+            image: hollowman6/send-message-to-wechat:latest
+            env:
+              - name: DELAYS
+                valueFrom:
+                  configMapKeyRef:
+                    name: wechat-message-delays
+                    key: delays
+              - name: TITLE
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: title
+              - name: MSG
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: msg
+              - name: SERVERCHANSCKEY
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: serverchansckey
+              - name: OPENID
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: openid
+              - name: PPTOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: openid
+              - name: PPTOPIC
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-message-secret
+                    key: pptopic
+          restartPolicy: OnFailure

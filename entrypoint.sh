@@ -4,7 +4,7 @@
 env -0 | while IFS='=' read -r -d '' n v; do
     if [ ${n#INPUT_} != $n ]
     then
-        echo "export ${n#INPUT_}=$v" >> /envar
+        echo "export ${n#INPUT_}='$v'" >> /envar
     fi
 done
 if [ -f "/envar" ]; then
