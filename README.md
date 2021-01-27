@@ -116,8 +116,8 @@ Docker Hub: https://hub.docker.com/r/hollowman6/send-message-to-wechat
 如果你需要通过Docker运行，只需要将上述Actions Secret变量名和值分别设置为环境变量(另外增加一个DELAYS为发送消息等待时间，值同[使用方法](#使用方法)步骤6中要求)，然后执行下述命令即可：
 ```bash
 docker run -it \
-    -e TITLE=$TITLE \
-    -e MSG=$MSG \
+    -e TITLE="$TITLE" \
+    -e MSG="$MSG" \
     -e DELAYS=$DELAYS \
     -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
     -e OPENID=$OPENID \
