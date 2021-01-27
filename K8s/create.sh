@@ -7,7 +7,7 @@ command="kubectl create secret generic wechat-message-secret"
 for secret in ${secrets[*]}
 do
     read -p "-"$secret": " content
-    command=$command" --from-literal="$secret"='"$content"'"
+    command=$command" --from-literal="$secret"="$content
 done
 $command
 

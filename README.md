@@ -252,8 +252,8 @@ If you need to run through docker, just set the above Actions Secrets name and v
 
 ```bash
 docker run -it \
-    -e TITLE=$TITLE \
-    -e MSG=$MSG \
+    -e TITLE="$TITLE" \
+    -e MSG="$MSG" \
     -e DELAYS=$DELAYS \
     -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
     -e OPENID=$OPENID \
