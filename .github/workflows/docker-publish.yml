@@ -7,9 +7,9 @@ on:
         description: 'Tags'
         required: false
   push:
-    # Publish `main` as Docker `latest` image.
+    # Publish `$default-branch` as Docker `latest` image.
     branches:
-      - main
+      - $default-branch
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -56,7 +56,7 @@ jobs:
             # Strip "v" prefix from tag name
             [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
             # Use Docker `latest` tag convention
-            [ "$VERSION" == "main" ] && VERSION=latest
+            [ "$VERSION" == "$default-branch" ] && VERSION=latest
           else
             VERSION=${{ github.event.inputs.delays }}
           fi
@@ -80,10 +80,10 @@ jobs:
             # Strip "v" prefix from tag name
             [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
             # Use Docker `latest` tag convention
-            [ "$VERSION" == "main" ] && VERSION=latest
+            [ "$VERSION" == "$default-branch" ] && VERSION=latest
           else
             VERSION=${{ github.event.inputs.delays }}
           fi
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION                       
-          docker buildx build -t $IMAGE_ID:$VERSION --platform ${{ steps.buildx.outputs.platforms }} --push .
+          docker buildx build -t $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --push .
