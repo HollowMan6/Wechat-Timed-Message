@@ -49,7 +49,7 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.actor }}/$IMAGE_NAME
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          if [ -z "${{ github.event.inputs.delays }}"]
+          if [ -z "${{ github.event.inputs.tags }}" ]
           then
             # Strip git ref prefix from version
             VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -58,7 +58,7 @@ jobs:
             # Use Docker `latest` tag convention
             [ "$VERSION" == "main" ] && VERSION=latest
           else
-            VERSION=${{ github.event.inputs.delays }}
+            VERSION=${{ github.event.inputs.tags }}
           fi
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
@@ -73,7 +73,7 @@ jobs:
           IMAGE_ID=${{ secrets.DOCKERHUB_UN }}/$IMAGE_NAME
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          if [ -z "${{ github.event.inputs.delays }}"]
+          if [ -z "${{ github.event.inputs.tags }}" ]
           then
             # Strip git ref prefix from version
             VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -82,7 +82,7 @@ jobs:
             # Use Docker `latest` tag convention
             [ "$VERSION" == "main" ] && VERSION=latest
           else
-            VERSION=${{ github.event.inputs.delays }}
+            VERSION=${{ github.event.inputs.tags }}
           fi
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION                       
