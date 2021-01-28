@@ -1,8 +1,8 @@
-FROM python:latest
+FROM python:slim
 
 MAINTAINER Hollow Man <hollowman@hollowman.ml>
 
-LABEL version="1.0.2"
+LABEL version="1.0.3"
 LABEL repository="https://github.com/HollowMan6/Wechat-Timed-Message"
 LABEL homepage="https://hollowman.ml/"
 LABEL maintainer="Hollow Man <hollowman@hollowman.ml>"
