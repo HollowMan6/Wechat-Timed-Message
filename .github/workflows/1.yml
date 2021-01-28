@@ -30,7 +30,7 @@ jobs:
             PPTOPIC: ${{ secrets.PPTOPIC }}
             TITLE: ${{ secrets[format('TITLE{0}', github.workflow)] }}
             MSG: ${{ secrets[format('MSG{0}', github.workflow)] }}
-          run: python Wechat-Timed-Message-Through-Actions.py
+          run: python Wechat-Timed-Message.py
         - name: 'Re-run workflow if failed and GPATOKEN set'
           env:
             GPATOKEN: ${{ secrets.GPATOKEN }}

@@ -25,4 +25,4 @@ then
     fi
 fi
 echo "---Send Message to Wechat---"
-python /Wechat-Timed-Message-Through-Actions.py
+python /Wechat-Timed-Message.py

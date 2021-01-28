@@ -1,26 +1,26 @@
-# 使用Github Actions workflows向微信推送定时消息
+# 向微信推送定时消息
 
-[![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message-Through-Actions)](../../graphs/commit-activity)
+[![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message)](../../graphs/commit-activity)
 ![Python package](../../workflows/Python%20package/badge.svg)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
-[![watchers](https://img.shields.io/github/watchers/HollowMan6/Wechat-Timed-Message-Through-Actions?style=social)](../../watchers)
-[![stars](https://img.shields.io/github/stars/HollowMan6/Wechat-Timed-Message-Through-Actions?style=social)](../../stargazers)
-[![forks](https://img.shields.io/github/forks/HollowMan6/Wechat-Timed-Message-Through-Actions?style=social)](../../network/members)
+[![watchers](https://img.shields.io/github/watchers/HollowMan6/Wechat-Timed-Message?style=social)](../../watchers)
+[![stars](https://img.shields.io/github/stars/HollowMan6/Wechat-Timed-Message?style=social)](../../stargazers)
+[![forks](https://img.shields.io/github/forks/HollowMan6/Wechat-Timed-Message?style=social)](../../network/members)
 
 [![Open Source Love](https://img.shields.io/badge/-%E2%9D%A4%20Open%20Source-Green?style=flat-square&logo=Github&logoColor=white&link=https://hollowman6.github.io/fund.html)](https://hollowman6.github.io/fund.html)
 [![GPL Licence](https://img.shields.io/badge/license-GPL-blue)](https://opensource.org/licenses/GPL-3.0/)
-[![Repo-Size](https://img.shields.io/github/repo-size/HollowMan6/Wechat-Timed-Message-Through-Actions.svg)](../../archive/master.zip)
+[![Repo-Size](https://img.shields.io/github/repo-size/HollowMan6/Wechat-Timed-Message.svg)](../../archive/master.zip)
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/HollowMan6/Wechat-Timed-Message-Through-Actions.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message-Through-Actions/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HollowMan6/Wechat-Timed-Message-Through-Actions.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message-Through-Actions/context:python)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/HollowMan6/Wechat-Timed-Message.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HollowMan6/Wechat-Timed-Message.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message/context:python)
 [![](https://images.microbadger.com/badges/image/hollowman6/send-message-to-wechat.svg)](https://microbadger.com/images/hollowman6/send-message-to-wechat)
 
 (English version is down below)
 
 ### 好用记得收藏(右上角**加星★Star**)哦!
 
-[微信消息推送脚本](Wechat-Timed-Message-Through-Actions.py)
+[微信消息推送脚本](Wechat-Timed-Message.py)
 
 [工作流存放文件夹](.github/workflows)
 
@@ -71,7 +71,7 @@
 **新**：增加可选的遇到发送消息失败的情况，自动重启工作流，并等待一段时间后再次发送消息。如果你需要这个功能，则请创建一个Personal Access Token, [获取教程](https://docs.github.com/cn/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token)(第7步令牌的作用域权限你只需要选中workflow这一栏即可)。然后创建一个Name为`GPATOKEN`，value为你的令牌值的Actions Secret。
 
 默认再次发送消息等待时间为30分钟，如果你有需要可以将[这里](
-https://github.com/HollowMan6/Wechat-Timed-Message-Through-Actions/blob/main/.github/workflows/1.yml#L42)的`30m`替换为你想要的数值，这里的时间遵循Linux sleep 函数对应时间语法：一个数字后接 `s` 对应秒, `m` 对应分钟等。
+https://github.com/HollowMan6/Wechat-Timed-Message/blob/main/.github/workflows/1.yml#L42)的`30m`替换为你想要的数值，这里的时间遵循Linux sleep 函数对应时间语法：一个数字后接 `s` 对应秒, `m` 对应分钟等。
 
 如果是因为本仓库程序本身因为失效而导致的报错，你可以取消正在运行中的工作流从而终止这一循环。
 
@@ -98,7 +98,7 @@ https://github.com/HollowMan6/Wechat-Timed-Message-Through-Actions/blob/main/.gi
 
 ```yaml
 - name: 'Send Message to Wechat'
-  uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+  uses: HollowMan6/Wechat-Timed-Message@main
   with:
     DELAYS: ${{ github.event.inputs.delays }}
     SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
@@ -152,7 +152,7 @@ docker build -t hollowman6/send-message-to-wechat .
 
 ***对于使用本代码所造成的一切不良后果，本人将不负任何责任！***
 
-# Send timed message to Wechat through Github Actions workflows
+# Send timed message to Wechat
 
 ### Please **★Star** if you think it's great!
 
@@ -206,7 +206,7 @@ If the workflow fails due to some errors, GitHub will automatically send an emai
 **NEW**: Add the optional option to restart the workflow automatically in case of Send Message to Wechat in failure, and wait for a period of time to re-run workflow again automatically. If you need this, please create a Personal Access Token, [Here's Guides to create](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token)(In step 7 scopes or permissions, you only need to select the `workflow` row). Then create an Actions Secret with the name of `GPATOKEN` and the value with your token.
 
 The default waiting time is 30 minutes. You can replace `30m` [here](
-https://github.com/HollowMan6/Wechat-Timed-Message-Through-Actions/blob/main/.github/workflows/1.yml#L42) with the time you want. The time here follows the Linux sleep syntax for time units: a number followed by `s` for seconds, `m` for minutes, etc.
+https://github.com/HollowMan6/Wechat-Timed-Message/blob/main/.github/workflows/1.yml#L42) with the time you want. The time here follows the Linux sleep syntax for time units: a number followed by `s` for seconds, `m` for minutes, etc.
 
 If the error is caused by the repository program itself, you can cancel the running workflow to terminate the loop.
 
@@ -233,7 +233,7 @@ You can create your own repository and configure your own workflow to use, [Exam
 
 ```yaml
 - name: 'Send Message to Wechat'
-  uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+  uses: HollowMan6/Wechat-Timed-Message@main
   with:
     DELAYS: ${{ github.event.inputs.delays }}
     SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}

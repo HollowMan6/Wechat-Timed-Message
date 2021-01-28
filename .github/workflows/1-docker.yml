@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: 'Send Message to Wechat'
-          uses: HollowMan6/Wechat-Timed-Message-Through-Actions@main
+          uses: HollowMan6/Wechat-Timed-Message@main
           with:
             DELAYS: ${{ github.event.inputs.delays }}
             SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
