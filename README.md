@@ -18,6 +18,8 @@
 
 (English version is down below)
 
+源Github项目地址：https://github.com/HollowMan6/Wechat-Timed-Message
+
 ### 好用记得收藏(右上角**加星★Star**)哦!
 
 [微信消息推送脚本](Wechat-Timed-Message.py)
@@ -25,6 +27,8 @@
 [工作流存放文件夹](.github/workflows)
 
 支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab运行](#crontab)，[Docker运行](#docker)，[Kubernetes运行](#kubernetes)等。
+
+[Docker镜像](https://hub.docker.com/r/hollowman6/send-message-to-wechat)支持在`amd64`、`arm64`、`arm v7`、`linux/arm/v6`、`ppc64le`、`s390x`、`386`多架构运行。
 
 ## 使用方法
 
@@ -111,7 +115,7 @@ https://github.com/HollowMan6/Wechat-Timed-Message/blob/main/.github/workflows/1
 
 ## Docker
 
-Docker Hub: https://hub.docker.com/r/hollowman6/send-message-to-wechat
+Docker Hub 仓库: https://hub.docker.com/r/hollowman6/send-message-to-wechat
 
 如果你需要通过Docker运行，只需要将上述Actions Secret变量名和值分别设置为环境变量(另外增加一个DELAYS为发送消息等待时间，值同[使用方法](#使用方法)步骤6中要求)，然后执行下述命令即可：
 ```bash
@@ -154,6 +158,8 @@ docker build -t hollowman6/send-message-to-wechat .
 
 # Send timed message to Wechat
 
+Source Github Repository Link: https://github.com/HollowMan6/Wechat-Timed-Message
+
 ### Please **★Star** if you think it's great!
 
 [Python library dependency](../../network/dependencies)
@@ -161,6 +167,8 @@ docker build -t hollowman6/send-message-to-wechat .
 [Workflows](.github/workflows)
 
 Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab](#crontab)，[run with Docker](#docker)，[run with Kubernetes](#kubernetes) etc.
+
+[Docker Image](https://hub.docker.com/r/hollowman6/send-message-to-wechat) support running on multiple architectures such as `amd64`, `arm64`, `arm v7`, `linux/arm/v6`, `ppc64le`, `s390x`, `386`.
 
 ## Usage
 
@@ -246,7 +254,7 @@ You can create your own repository and configure your own workflow to use, [Exam
 
 ## Docker
 
-Docker Hub: https://hub.docker.com/r/hollowman6/send-message-to-wechat
+Docker Hub Repository: https://hub.docker.com/r/hollowman6/send-message-to-wechat
 
 If you need to run through docker, just set the above Actions Secrets name and value as environment variables (In addition, add a DELAYS as the waiting time, and the value is the same requirement as that in step 6 of [usage](#usage)), and then execute the following command:
 
