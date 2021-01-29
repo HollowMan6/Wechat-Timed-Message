@@ -29,7 +29,8 @@ if sckey:
     message = urllib.parse.quote_plus(message.replace('\n', '\n\n'))
     res = urllib.request.urlopen(host + sckey + ".send?text=" + title +
                         "&desp=" + message + user)
-    result = json.loads(res.read().decode('utf-8'))
+    response = res.read().decode('utf-8')
+    result = json.loads(response)
     if not openid and result['errno'] == 0:
         print("成功通过Sever酱将结果通知给用户!")
     elif openid and result['data']['errno'] == 0:
@@ -38,7 +39,7 @@ if sckey:
         else:
             print("成功通过Sever酱将结果通知到测试公众号的指定关注用户和创建用户!")
     else:
-        errorServerChan = "Server酱推送错误: " + res.read().decode('utf-8')
+        errorServerChan = "Server酱推送错误: " + response
 else:
     print("未设置SERVERCHANSCKEY，尝试使用PushPlus...")
 
@@ -52,11 +53,12 @@ if pptoken:
     message = urllib.parse.quote_plus(message.replace('\n', '<br>'))
     res = urllib.request.urlopen(host + "send?token=" + pptoken + "&title=" + title +
                         "&content=" + message + "&template=html&topic=" + pptopic)
-    result = json.loads(res.read().decode('utf-8'))
+    response = res.read().decode('utf-8')
+    result = json.loads(response)
     if result['code'] == 200:
         print("成功通过PushPlus将结果通知给相关用户!")
     else:
-        raise Exception("PushPlus推送错误: " + res.read().decode('utf-8') +
+        raise Exception("PushPlus推送错误: " + response +
                         "\n" + errorServerChan)
 else:
     print("未设置PPTOKEN！")
