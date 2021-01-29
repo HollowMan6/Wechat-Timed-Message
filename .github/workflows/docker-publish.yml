@@ -26,14 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@master
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@master
 
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
@@ -86,4 +86,4 @@ jobs:
           fi
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION                       
-          docker buildx build -t $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --push .
+          docker buildx build -t $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64,linux/arm64/v8,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6,linux/arm/v5 --push .

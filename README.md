@@ -28,7 +28,7 @@
 
 支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab运行](#crontab)，[Docker运行](#docker)，[Kubernetes运行](#kubernetes)等。
 
-[Docker镜像](https://hub.docker.com/r/hollowman6/send-message-to-wechat)支持在`amd64`、`arm64`、`arm v7`、`linux/arm/v6`、`ppc64le`、`s390x`、`386`多架构运行。
+[Docker镜像](https://hub.docker.com/r/hollowman6/send-message-to-wechat)支持在`amd64`、`arm64`、`arm64 v8`、`arm v7`、`arm v6`、`arm v5`、`ppc64le`、`s390x`、`386`多架构运行。
 
 ## 使用方法
 
@@ -168,7 +168,7 @@ Source Github Repository Link: https://github.com/HollowMan6/Wechat-Timed-Messag
 
 Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab](#crontab)，[run with Docker](#docker)，[run with Kubernetes](#kubernetes) etc.
 
-[Docker Image](https://hub.docker.com/r/hollowman6/send-message-to-wechat) support running on multiple architectures such as `amd64`, `arm64`, `arm v7`, `linux/arm/v6`, `ppc64le`, `s390x`, `386`.
+[Docker Image](https://hub.docker.com/r/hollowman6/send-message-to-wechat) support running on multiple architectures such as `amd64`, `arm64`, `arm64 v8`, `arm v7`, `arm v6`, `arm v5`, `ppc64le`, `s390x`, `386`.
 
 ## Usage
 
