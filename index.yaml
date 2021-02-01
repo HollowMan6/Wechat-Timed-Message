@@ -4,13 +4,13 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: wechat-timed-message
-          image: hollowman6/send-message-to-wechat:1.0.6
-      artifacthub.io/license: GPLv3
+          image: hollowman6/send-message-to-wechat:1.0.7
+      artifacthub.io/license: GPL-3.0-or-later
     apiVersion: v2
-    appVersion: 1.0.9
-    created: "2021-02-01T21:29:14.7417184+08:00"
+    appVersion: 1.0.7
+    created: "2021-02-01T23:44:42.4575702+08:00"
     description: A chart for send timed message to Wechat. (向微信推送定时消息)
-    digest: 1008b549324b77e0816e45e27b70349330ecc01c887d4489bbd2f94368872386
+    digest: a2d5159010a61fc0fd338b162e4bb1a38df5e34ce3471f855abdd5aa1a373d35
     home: https://hollowman.ml/
     icon: https://avatars.githubusercontent.com/u/67548465?s=200&v=4
     keywords:
@@ -24,6 +24,6 @@ entries:
     - https://github.com/HollowMan6/Wechat-Timed-Message
     type: application
     urls:
-    - http://hollowman.ml/Wechat-Timed-Message/helmChart/wechat-timed-message-1.0.9.tgz
-    version: 1.0.9
-generated: "2021-02-01T21:29:14.7407875+08:00"
+    - http://hollowman.ml/Wechat-Timed-Message/helmChart/wechat-timed-message-1.0.7.tgz
+    version: 1.0.7
+generated: "2021-02-01T23:44:42.4552907+08:00"

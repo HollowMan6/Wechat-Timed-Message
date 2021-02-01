@@ -1,17 +1,17 @@
 # 向微信推送定时消息
 
-[![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message)](../../graphs/commit-activity)
+[![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message)](https://github.com/HollowMan6/Wechat-Timed-Message/graphs/commit-activity)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wechat-timed-message)](https://artifacthub.io/packages/search?repo=wechat-timed-message)
-![Python package](../../workflows/Python%20package/badge.svg)
+![Python package](https://github.com/HollowMan6/Wechat-Timed-Message/workflows/Python%20package/badge.svg)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
-[![watchers](https://img.shields.io/github/watchers/HollowMan6/Wechat-Timed-Message?style=social)](../../watchers)
-[![stars](https://img.shields.io/github/stars/HollowMan6/Wechat-Timed-Message?style=social)](../../stargazers)
-[![forks](https://img.shields.io/github/forks/HollowMan6/Wechat-Timed-Message?style=social)](../../network/members)
+[![watchers](https://img.shields.io/github/watchers/HollowMan6/Wechat-Timed-Message?style=social)](https://github.com/HollowMan6/Wechat-Timed-Message/watchers)
+[![stars](https://img.shields.io/github/stars/HollowMan6/Wechat-Timed-Message?style=social)](https://github.com/HollowMan6/Wechat-Timed-Message/stargazers)
+[![forks](https://img.shields.io/github/forks/HollowMan6/Wechat-Timed-Message?style=social)](https://github.com/HollowMan6/Wechat-Timed-Message/network/members)
 
 [![Open Source Love](https://img.shields.io/badge/-%E2%9D%A4%20Open%20Source-Green?style=flat-square&logo=Github&logoColor=white&link=https://hollowman6.github.io/fund.html)](https://hollowman6.github.io/fund.html)
 [![GPL Licence](https://img.shields.io/badge/license-GPL-blue)](https://opensource.org/licenses/GPL-3.0/)
-[![Repo-Size](https://img.shields.io/github/repo-size/HollowMan6/Wechat-Timed-Message.svg)](../../archive/master.zip)
+[![Repo-Size](https://img.shields.io/github/repo-size/HollowMan6/Wechat-Timed-Message.svg)](https://github.com/HollowMan6/Wechat-Timed-Message/archive/master.zip)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/HollowMan6/Wechat-Timed-Message.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HollowMan6/Wechat-Timed-Message.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HollowMan6/Wechat-Timed-Message/context:python)
@@ -155,28 +155,43 @@ docker build -t hollowman6/send-message-to-wechat .
 
 Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-timed-message
 
-### [在线安装脚本(推荐使用)](helmChart/install-online.sh)
+你可以[参考这里](helmChart/wechat-timed-message/values.yaml)来自定义一些values值。
 
-参考脚本：
+### V3
+#### [在线安装脚本(推荐使用)](helmChart/install-online.sh)
+
+脚本会提示你输入相关Secrets，并且会自动创建一个名为`wechat-timed-message`的Kubernetes namespace，并将Helm Charts安装在其中。
+
+参考命令：
 
 ```bash
+kubectl create ns wechat-timed-message
 helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
-helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
+helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --namespace wechat-timed-message --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
 ```
 
-### 从仓库安装
+#### 从仓库安装
 
-参考脚本：
+参考命令：
 
 ```bash
+kubectl create ns wechat-timed-message
 cd helmChart/wechat-timed-message
-helm install wechat-timed-message . --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
+helm install wechat-timed-message . --namespace wechat-timed-message --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
 ```
 
-### 卸载
+#### 卸载
+
+删除helm chart release:
 
 ```bash
-helm uninstall wechat-timed-message
+helm uninstall wechat-timed-message --namespace wechat-timed-message
+```
+
+删除相关Kubernetes namespace:
+
+```bash
+kubectl delete ns wechat-timed-message
 ```
 
 **警告**：
@@ -191,7 +206,7 @@ Source Github Repository Link: https://github.com/HollowMan6/Wechat-Timed-Messag
 
 ### Please **★Star** if you think it's great!
 
-[Python library dependency](../../network/dependencies)
+[Python library dependency](https://github.com/HollowMan6/Wechat-Timed-Message/network/dependencies)
 
 [Workflows](.github/workflows)
 
@@ -322,29 +337,43 @@ Also [change here to set Cron expression](K8s/Wechat-Timed-Message.yml#L15)
 ## Helm
 
 Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-timed-message
+You can [refer to here](helmChart/wechat-timed-message/values.yaml) to customize some values.
 
-### [Online Install Script(Recommend)](helmChart/install-online.sh)
+### V3
+#### [Online Install Script(Recommend)](helmChart/install-online.sh)
+
+The script will prompt users to enter the Secrets, and sutomatically created a Kubernetes namespace called `wechat-timed-message`, and install Helm Charts into it.
 
 Example command:
 
 ```bash
+kubectl create ns wechat-timed-message
 helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
-helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
+helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --namespace wechat-timed-message --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
 ```
 
-### From Repository
+#### From Repository
 
 Example command:
 
 ```bash
+kubectl create ns wechat-timed-message
 cd helmChart/wechat-timed-message
-helm install wechat-timed-message . --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
+helm install wechat-timed-message . --namespace wechat-timed-message --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
 ```
 
-### Uninstall
+#### Uninstall
+
+Delete helm chart release:
 
 ```bash
-helm uninstall wechat-timed-message
+helm uninstall wechat-timed-message --namespace wechat-timed-message
+```
+
+Delete related Kubernetes namespace:
+
+```bash
+kubectl delete ns wechat-timed-message
 ```
 
 **Warning**:

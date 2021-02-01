@@ -1,9 +1,9 @@
 apiVersion: v2
 name: wechat-timed-message
 description: A chart for send timed message to Wechat. (向微信推送定时消息)
-version: 1.0.9
+version: 1.0.7
 type: application
-appVersion: "1.0.9"
+appVersion: "1.0.7"
 keywords:
   - wechat
   - timed-message
@@ -17,5 +17,5 @@ maintainers:
 annotations:
   artifacthub.io/images: |
     - name: wechat-timed-message
-      image: hollowman6/send-message-to-wechat:1.0.6
-  artifacthub.io/license: GPLv3
+      image: hollowman6/send-message-to-wechat:1.0.7
+  artifacthub.io/license: GPL-3.0-or-later
