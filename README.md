@@ -1,6 +1,7 @@
 # 向微信推送定时消息
 
 [![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message)](../../graphs/commit-activity)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wechat-timed-message)](https://artifacthub.io/packages/search?repo=wechat-timed-message)
 ![Python package](../../workflows/Python%20package/badge.svg)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
@@ -26,7 +27,7 @@
 
 [工作流存放文件夹](.github/workflows)
 
-支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab运行](#crontab)，[Docker运行](#docker)，[Kubernetes运行](#kubernetes)等。
+支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab运行](#crontab)，[Docker运行](#docker)，[Kubernetes直接运行](#kubernetes)，[使用Helm包管理在Kubernetes运行](#helm)等。
 
 [Docker镜像](https://hub.docker.com/r/hollowman6/send-message-to-wechat)支持在`amd64`、`arm64`、`arm32v7`、`arm32v6`、`arm32v5`、`ppc64le`、`s390x`、`i386`多架构(包括大型机、普通PC机以及树莓派等开发板)运行。
 
@@ -150,6 +151,34 @@ docker build -t hollowman6/send-message-to-wechat .
 
 还可以[更改这里来设定Cron表达式](K8s/Wechat-Timed-Message.yml#L15)
 
+## Helm
+
+Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-timed-message
+
+### [在线安装脚本(推荐使用)](helmChart/install-online.sh)
+
+参考脚本：
+
+```bash
+helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
+helm install Wechat-Timed-Message/wechat-timed-message wechat-timed-message --set cardID='`[你的校园卡号]`' --set password='`[你的密码]`' --set '`[...]`'
+```
+
+### 从仓库安装
+
+参考脚本：
+
+```bash
+cd helmChart/wechat-timed-message
+helm install wechat-timed-message . --set cardID='`[你的校园卡号]`' --set password='`[你的密码]`' --set '`[...]`'
+```
+
+### 卸载
+
+```bash
+helm uninstall wechat-timed-message
+```
+
 **警告**：
 
 ***仅供测试使用，不可用于任何非法用途！***
@@ -166,7 +195,7 @@ Source Github Repository Link: https://github.com/HollowMan6/Wechat-Timed-Messag
 
 [Workflows](.github/workflows)
 
-Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab](#crontab)，[run with Docker](#docker)，[run with Kubernetes](#kubernetes) etc.
+Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab](#crontab)，[run with Docker](#docker)，[run with Kubernetes directly](#kubernetes), [Use Helm Package Manager to run in Kubernetes](#helm) etc.
 
 [Docker Image](https://hub.docker.com/r/hollowman6/send-message-to-wechat) support running on multiple architectures such as `amd64`, `arm64`, `arm32v7`, `arm32v6`, `arm32v5`, `ppc64le`, `s390x`, `i386` including Mainframe, PC and Demoboard like Raspberry Pi.
 
@@ -289,6 +318,34 @@ You can refer to the configuration file [K8s](K8s).Also create the relevant Secr
 You can also [change here to set `DELAYS` Variable](K8s/Wechat-Timed-Message.yml#L6)
 
 Also [change here to set Cron expression](K8s/Wechat-Timed-Message.yml#L15)
+
+## Helm
+
+Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-timed-message
+
+### [Online Install Script(Recommend)](helmChart/install-online.sh)
+
+Example command:
+
+```bash
+helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
+helm install Wechat-Timed-Message/wechat-timed-message wechat-timed-message --set cardID='`[Your CardID]`' --set password='`[Your Password]`' --set '`[...]`'
+```
+
+### From Repository
+
+Example command:
+
+```bash
+cd helmChart/wechat-timed-message
+helm install wechat-timed-message . --set cardID='`[你的校园卡号]`' --set password='`[你的密码]`' --set '`[...]`'
+```
+
+### Uninstall
+
+```bash
+helm uninstall wechat-timed-message
+```
 
 **Warning**:
 

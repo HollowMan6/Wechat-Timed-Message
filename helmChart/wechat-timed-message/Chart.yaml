@@ -1,0 +1,21 @@
+apiVersion: v2
+name: wechat-timed-message
+description: A chart for send timed message to Wechat. (向微信推送定时消息)
+version: 1.0.9
+type: application
+appVersion: "1.0.9"
+keywords:
+  - wechat
+  - timed-message
+home: "https://hollowman.ml/"
+icon: https://avatars.githubusercontent.com/u/67548465?s=200&v=4
+sources:
+  - "https://github.com/HollowMan6/Wechat-Timed-Message"
+maintainers:
+  - name: Hollow Man
+    email: hollowman@hollowman.ml
+annotations:
+  artifacthub.io/images: |
+    - name: wechat-timed-message
+      image: hollowman6/send-message-to-wechat:1.0.6
+  artifacthub.io/license: GPLv3

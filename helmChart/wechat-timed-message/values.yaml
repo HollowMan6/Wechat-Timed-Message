@@ -1,0 +1,31 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Required
+title: ""
+message: ""
+schedule: "0 2 21 * *"
+
+# Optional data and settings
+serverChanSCKey: ""
+openID: ""
+ppToken: ""
+ppTopic: ""
+failureDelayTime: "30m"
+failedJobsHistoryLimit: 1
+successfulJobsHistoryLimit: 3
+concurrencyPolicy: Allow
+restartPolicy: OnFailure
+imagePullPolicy: IfNotPresent
+name: lzu-auto-covid-health-report
+securityContext:
+  runAsUser: 
+  runAsGroup: 
+  fsGroup: 
+
+
+# Do not change below for deploying but DEBUGS
+image:
+  repository: hollowman6/send-message-to-wechat
+  tag: latest
+

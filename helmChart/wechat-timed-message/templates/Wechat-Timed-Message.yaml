@@ -1,0 +1,146 @@
+{{- $chart_name := .Chart.Name }}
+{{- $chart_version := .Chart.Version | replace "+" "_" }}
+{{- $chart_description := .Chart.Description | quote  }}
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    chart: "{{ $chart_name }}-{{ $chart_version }}"
+  annotations:
+    description: {{ $chart_description }}
+spec:
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ .Values.name }}
+        spec:
+          {{- if .Values.securityContext.runAsUser }}
+          securityContext:
+            runAsUser: {{ .Values.securityContext.runAsUser }}
+            {{- if .Values.securityContext.runAsGroup }}
+            runAsGroup: {{ .Values.securityContext.runAsGroup }}
+            {{- end }}
+            {{- if .Values.securityContext.fsGroup }}
+            fsGroup: {{ .Values.securityContext.fsGroup }}
+            {{- end }}
+          {{- end }}
+          containers:
+          - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.imagePullPolicy }}
+            name: {{ .Values.name }}
+            env:
+            - name: DELAYS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.name }}-configmap
+                  key: delays
+            - name: TITLE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: title
+            - name: MSG
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: msg
+            - name: SERVERCHANSCKEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: serverchansckey
+            - name: OPENID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: openid
+            - name: PPTOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: pptoken
+            - name: PPTOPIC
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: pptopic
+            {{- with .Values.env }}
+{{ toYaml . | indent 12 }}
+            {{- end }}
+            {{- if .Values.command }}
+            command: {{ .Values.command }}
+            {{- end }}
+            {{- with .Values.args }}
+            args:
+{{ toYaml . | indent 12 }}
+              {{- end }}
+            {{- with .Values.resources }}
+            resources:
+{{ toYaml . | indent 14 }}
+            {{- end }}
+            volumeMounts:
+            - mountPath: /cache
+              name: report-delays-marking
+            {{- with .Values.volumeMounts }}
+{{ toYaml . | indent 12 }}
+            {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+{{ toYaml . | indent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+{{ toYaml . | indent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+{{ toYaml . | indent 12 }}
+          {{- end }}
+          restartPolicy: {{ .Values.restartPolicy }}
+          volumes:
+          - name: report-delays-marking
+            emptyDir: {}
+          {{- with .Values.volumes }}
+{{ toYaml . | indent 12 }}
+          {{- end }}
+  schedule: {{ .Values.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.name }}-configmap"
+  labels:
+    chart: "{{ $chart_name }}-{{ $chart_version }}"
+data:
+  delays: {{ .Values.failureDelayTime | quote }}
+  {{- with .Values.configMap }}
+{{ toYaml . | indent 2 }}
+  {{- end }}
+
+---
+apiVersion: "v1"
+kind: "Secret"
+metadata:
+  name: "{{ .Values.name }}-secrets"
+  labels:
+    chart: "{{ $chart_name }}-{{ $chart_version }}"
+type: "Opaque"
+stringData:
+  title: {{ .Values.title | quote }}
+  msg: {{ .Values.message | quote }}
+  serverchansckey: {{ .Values.serverChanSCKey | quote }}
+  openid: {{ .Values.openID | quote }}
+  pptoken: {{ .Values.ppToken | quote }}
+  pptopic: {{ .Values.ppTopic | quote }}
+  {{- with .Values.secret }}
+{{ toYaml . | indent 2 }}
+  {{- end }}

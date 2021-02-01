@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: wechat-message-delays
+  name: wechat-timed-message-configmap
 data:
   delays: "30m"
 
@@ -24,37 +24,37 @@ spec:
               - name: DELAYS
                 valueFrom:
                   configMapKeyRef:
-                    name: wechat-message-delays
+                    name: wechat-timed-message-configmap
                     key: delays
               - name: TITLE
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: title
               - name: MSG
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: msg
               - name: SERVERCHANSCKEY
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: serverchansckey
               - name: OPENID
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: openid
               - name: PPTOKEN
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: openid
               - name: PPTOPIC
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-message-secret
+                    name: wechat-timed-message-secret
                     key: pptopic
             volumeMounts:
             - mountPath: /cache
