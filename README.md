@@ -161,7 +161,7 @@ Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-t
 
 ```bash
 helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
-helm install Wechat-Timed-Message/wechat-timed-message wechat-timed-message --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
+helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --set title='[你的消息标题]' --set message='[你的消息内容]' --set '[...]'
 ```
 
 ### 从仓库安装
@@ -329,7 +329,7 @@ Example command:
 
 ```bash
 helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
-helm install Wechat-Timed-Message/wechat-timed-message wechat-timed-message --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
+helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message --set title='[Your Message Title]' --set message='[Your Message Content]' --set '[...]'
 ```
 
 ### From Repository

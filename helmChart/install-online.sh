@@ -6,7 +6,7 @@ helm repo add Wechat-Timed-Message http://hollowman.ml/Wechat-Timed-Message
 # Install
 echo "---Enter your Actions Secrets, empty if it doesn't exists---"
 secrets=("title" "message" "serverChanSCKey" "openID" "ppToken" "ppTopic")
-command="helm install Wechat-Timed-Message/wechat-timed-message wechat-timed-message"
+command="helm install wechat-timed-message Wechat-Timed-Message/wechat-timed-message"
 for secret in ${secrets[*]}
 do
     read -p "-"$secret": " content
