@@ -29,32 +29,32 @@ spec:
               - name: TITLE
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: title
               - name: MSG
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: msg
               - name: SERVERCHANSCKEY
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: serverchansckey
               - name: OPENID
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: openid
               - name: PPTOKEN
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: pptoken
               - name: PPTOPIC
                 valueFrom:
                   secretKeyRef:
-                    name: wechat-timed-message-secret
+                    name: wechat-timed-message-secrets
                     key: pptopic
             volumeMounts:
             - mountPath: /cache
