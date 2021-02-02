@@ -45,7 +45,7 @@ do
     read -p "-"$secret": " content
     command=$command" --set "$secret"='"$content"'"
 done
-$command
+eval "$command"
 
 if [ -f "tmpt" ]; then
     rm tmpt
