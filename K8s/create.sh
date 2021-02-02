@@ -2,7 +2,7 @@
 
 # Setup Secrets
 echo "---Enter your Actions Secrets, empty if it doesn't exists---"
-command="kubectl create secret generic wechat-timed-message-secret"
+command="kubectl create secret generic wechat-timed-message-secrets"
 
 echo "-title(Empty line to end):"
 while read content
@@ -54,4 +54,4 @@ fi
 kubectl create -f Wechat-Timed-Message.yml
 
 # Check Details
-kubectl get secret/wechat-timed-message-secret configmap/wechat-timed-message-configmap cronjob/wechat-timed-message
+kubectl get secret/wechat-timed-message-secrets configmap/wechat-timed-message-configmap cronjob/wechat-timed-message
