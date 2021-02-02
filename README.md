@@ -160,7 +160,7 @@ Artifact Hub: https://artifacthub.io/packages/helm/wechat-timed-message/wechat-t
 ### V3
 #### [在线安装脚本(推荐使用)](helmChart/install-online.sh)
 
-脚本会提示你输入相关Secrets，并且会自动创建一个名为`wechat-timed-message`的Kubernetes namespace，并将Helm Charts安装在其中。
+脚本会提示你输入相关Secrets和schedule(cron表达式)，并且会自动创建一个名为`wechat-timed-message`的Kubernetes namespace，并将Helm Charts安装在其中。
 
 参考命令：
 
@@ -342,7 +342,7 @@ You can [refer to here](helmChart/wechat-timed-message/values.yaml) to customize
 ### V3
 #### [Online Install Script(Recommend)](helmChart/install-online.sh)
 
-The script will prompt users to enter the Secrets, and sutomatically created a Kubernetes namespace called `wechat-timed-message`, and install Helm Charts into it.
+The script will prompt users to enter the Secrets and schedule (cron expression), and automatically created a Kubernetes namespace called `wechat-timed-message`, and install Helm Charts into it.
 
 Example command:
 

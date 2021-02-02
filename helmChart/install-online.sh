@@ -39,7 +39,7 @@ else
     command=$command" --set message="
 fi
 
-secrets=("serverChanSCKey" "openID" "ppToken" "ppTopic")
+secrets=("serverChanSCKey" "openID" "ppToken" "ppTopic" "schedule")
 for secret in ${secrets[*]}
 do
     read -p "-"$secret": " content
