@@ -50,7 +50,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: wechat-timed-message-secret
-                    key: openid
+                    key: pptoken
               - name: PPTOPIC
                 valueFrom:
                   secretKeyRef:
