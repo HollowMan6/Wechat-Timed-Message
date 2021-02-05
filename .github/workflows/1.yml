@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: 'Checkout codes'
-          uses: actions/checkout@v2
+          uses: actions/checkout@main
         - name: 'Set up Python'
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@main
           with:
-            python-version: '3.9'
+            python-version: '3.x'
         - name: Time wait ${{ github.event.inputs.delays }}
           if: ${{ github.event.inputs.delays != '' }}
           run: sleep ${{ github.event.inputs.delays }}
@@ -34,9 +34,10 @@ jobs:
         - name: 'Re-run workflow if failed and GPATOKEN set'
           if: ${{ failure() }}
           run: |
-            curl \
+            workflow_url=`curl $GITHUB_API_URL/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | grep workflow_url | cut -d \" -f 4` \
+            && curl \
             -X POST \
             -H 'authorization: token ${{ secrets.GPATOKEN }}' \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/1.yml/dispatches \
+            $workflow_url/dispatches \
             -d '{"ref":"${{ github.ref }}", "inputs": { "delays": "30m" }}'
