@@ -1,7 +1,10 @@
 # 向微信推送定时消息
 
+[![](https://dockeri.co/image/hollowman6/send-message-to-wechat)](https://hub.docker.com/repository/docker/hollowman6/send-message-to-wechat)
+
 [![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Wechat-Timed-Message)](https://github.com/HollowMan6/Wechat-Timed-Message/graphs/commit-activity)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wechat-timed-message)](https://artifacthub.io/packages/search?repo=wechat-timed-message)
+[![release-date](https://img.shields.io/github/release-date/HollowMan6/Wechat-Timed-Message)](https://github.com/HollowMan6/Wechat-Timed-Message/releases)
 ![Python package](https://github.com/HollowMan6/Wechat-Timed-Message/workflows/Python%20package/badge.svg)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
