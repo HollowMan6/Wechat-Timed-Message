@@ -24,11 +24,11 @@ jobs:
             TITLE: ${{ secrets.TITLE }}
             MSG: ${{ secrets.MSG }}
         - name: 'Re-run workflow if failed and GPATOKEN set'
-          env:
-            GPATOKEN: ${{ secrets.GPATOKEN }}
-          if: ${{ failure() && (env.GPATOKEN != '') }}
-          uses: benc-uk/workflow-dispatch@v1
-          with:
-            workflow: 'Docker Version - 1'
-            token: ${{ secrets.GPATOKEN }}
-            inputs: '{ "delays": "30m" }'
+          if: ${{ failure() }}
+          run: |
+            curl \
+            -X POST \
+            -H 'authorization: token ${{ secrets.GPATOKEN }}' \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/1-docker.yml/dispatches \
+            -d '{"ref":"${{ github.ref }}", "inputs": { "delays": "30m" }}'
