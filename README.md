@@ -50,17 +50,25 @@
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
-### Server酱
+### ~~Server酱~~
+
+***注: 因为微信发布公告将在2021年4月底下线模板消息，Server酱开发了以企业微信为主的多通道新版（Turbo版 sct.ftqq.com）。旧版将在4月后下线***
 
 如使用[Server酱](http://sc.ftqq.com/)来实现，它的配置方法请参考其说明文档。
 
 然后，你只需要创建一个Name为`SERVERCHANSCKEY`，value为[你的SCKEY调用代码值](http://sc.ftqq.com/?c=code)的Actions secret即可自动让仓库的工作流通过Server酱为你推送消息。
 
-### Server酱测试号版
+### ~~Server酱测试号版~~
+
+***注: 因为微信发布公告将在2021年4月底下线模板消息，Server酱开发了以企业微信为主的多通道新版（Turbo版 sct.ftqq.com）。旧版将在4月后下线***
 
 如果要使用[Server酱测试号版](https://sct.ftqq.com/)，请创建一个/修改Name为`SERVERCHANSCKEY`，value为[你的SendKey值](https://sct.ftqq.com/sendkey)的Actions secret。另外创建一个Name为`OPENID`的Actions secret，如果value值为`0`则是通过公众号仅发给自己。否则将value值设定为关注你测试公众号的那个用户的微信号openid，这时将发给自己的同时还会发送给那个指定用户。
 
 如果需要转换回普通的Sever酱请将`OPENID` Actions secret删除即可。
+
+### Server酱Turbo版
+
+按照[Server酱Turbo版](https://sct.ftqq.com/)教程在他们平台上企业微信配置成功之后，同Server酱测试号版处描述操作之后，然后只需要将`OPENID` value值置为`0`即可正常使用企业微信推送消息啦。
 
 ---
 
@@ -233,17 +241,25 @@ If you need to push the related information to multiple Wechat accounts, that is
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
-### ServerChan
+### ~~ServerChan~~
+
+***Note: because wechat announced that its template message will be offline at the end of April 2021, ServerChan have developed a new multi-channel Version (turbo version https://sct.ftqq.com) based on enterprise wechat. The old version will go offline in April***
 
 We Use [Server Chan](http://sc.ftqq.com/) to realize its functionality. For its configuration method, please refer to its documentation (In Chinese).
 
 Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information for you.
 
-### ServerChan Testing Subscription Version
+### ~~ServerChan Testing Subscription Version~~
+
+***Note: because wechat announced that its template message will be offline at the end of April 2021, ServerChan have developed a new multi-channel Version (turbo version https://sct.ftqq.com) based on enterprise wechat. The old version will go offline in April***
 
 If you want to use [ServerChan Testing Subscription Version](https://sct.ftqq.com/), please create/modify the Actions secret with the Name `SERVERCHANSCKEY` and the value [your sendkey value](https://sct.ftqq.com/sendkey). In addition, create a Actions secret with Name as `OPENID`, if the value is `0`, it is only send to yourself. Otherwise, set the value to be the specified user's Wechat openid who subscribed the Testing Subscription account, then it will send it to the designated user and yourself at the same time.
 
 If you need to switch back to normal SeverChan, please delete the `OPENID` actions secret.
+
+### ServerChan Turbo Version
+
+According to [ServerChan Turbo Version](https://sct.ftqq.com/) tutorial, configuring Enterprise Wechat message pushing on their platform, then after doing the same actions as the tutorial describes in the ServerChan Testing Subscription Version part, you just need to set the `openid` value to `0` so that this way can be functional.
 
 ---
 
