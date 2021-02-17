@@ -1,0 +1,51 @@
+{
+    "name": "LZU-Auto-COVID-Health-Report-Heroku",
+    "description": "LZU Auto COVID Health Report Using Heroku. (兰大疫情期间自动定时健康打卡)",
+    "keywords": ["lanzhou university", "auto", "covid", "health report"],
+    "env": {
+        "TITLE": {
+            "description": "消息标题",
+            "value": ""
+        },
+        "MSG": {
+            "description": "消息内容",
+            "value": "",
+            "required": false
+        },
+        "PPTOKEN": {
+            "description": "PushPlus Token(选用PushPlus推送必填*)",
+            "value": "",
+            "required": false
+        },
+        "PPTOPIC": {
+            "description": "PushPlus Topic 群组编码(仅一对多推送需要)",
+            "value": "",
+            "required": false
+        },
+        "SERVERCHANSCKEY": {
+            "description": "Server酱(或测试号/Turbo版) SCKEY/SendKey(选用Server酱系列推送必填)",
+            "value": "",
+            "required": false
+        },
+        "OPENID": {
+            "description": "额外微信公众号用户OpenID(Turbo版测试号仅发给自己填0, 否则填写该用户OpenID, 其他通道必填0; 老版不填)",
+            "value": "0",
+            "required": false
+        },
+        "TZ": {
+            "description": "自动推送任务执行时区(默认为GMT +8)",
+            "value": "Asia/Shanghai"
+        },
+        "CRONEXP": {
+            "description": "Cron表达式，使用上面TZ定义的时区，表达式校验地址:https://crontab.guru/；(默认为1,2,7,8月每天早7点)",
+            "value": "0 7 * 1,2,7,8 *"
+        },
+        "DELAYS": {
+            "description": "推送失败延迟时间，遵循Linux Sleep命令时间表达式(默认为30分钟，不启用则不填)",
+            "value": "30m",
+            "required": false
+        }
+    },
+    "website": "https://hollowman.ml/LZU-Auto-COVID-Health-Report/",
+    "repository": "https://github.com/HollowMan6/LZU-Auto-COVID-Health-Report"
+}
