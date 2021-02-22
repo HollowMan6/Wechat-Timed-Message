@@ -214,6 +214,8 @@ kubectl delete ns wechat-timed-message
 点击以上按钮部署成功后，请确保Overview中Dyno formation栏目中的clock为ON状态，如果不是请按开启：
 ![](img/Heroku.png)
 
+因为Free Dyno 30分钟会自动休眠，实测休眠时不会自动唤醒打卡，因而建议使用付费版，否则不推荐使用。
+
 **警告**：
 
 ***仅供测试使用，不可用于任何非法用途！***
@@ -412,6 +414,8 @@ kubectl delete ns wechat-timed-message
 
 After sccessfully deployed the app, please make sure that the clock is ON at Dyno formation part in the Overview Section. If it's not, turn it on:
 ![](img/Heroku.png)
+
+Because Free Dyno will automatically sleep in 30 minutes, it will not automatically wake up even the specified time arrives when it sleeps, so it is recommended to use the paid Dyno, otherwise is not recommended.
 
 **Warning**:
 
