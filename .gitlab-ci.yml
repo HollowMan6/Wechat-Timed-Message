@@ -29,7 +29,7 @@ run:
   script:
     - python -V  # Print out python version for debugging
     - python -m pip install --upgrade pip
-    - pip install -r requirements-run.txt
+    - pip install -r requirements.txt
     - echo "---Send Message to Wechat---"
       python Wechat-Timed-Message.py
 
