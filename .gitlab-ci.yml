@@ -1,0 +1,46 @@
+image: python:latest
+
+variables:
+  TZ: "Asia/Shanghai"
+  MSG: ""
+  TITLE: ""
+  SERVERCHANSCKEY: ""
+  OPENID: ""
+  PPTOKEN: ""
+  PPTOPIC: ""
+  DELAYS: ""
+  GPATOKEN: ""
+
+stages:
+  - wait
+  - run
+  - retry
+
+wait:
+  stage: wait
+  script:
+    - echo "---Sleep $DELAYS---";
+    - sleep $DELAYS
+  rules:
+    - if: $DELAYS != ""
+
+run:
+  stage: run
+  script:
+    - python -V  # Print out python version for debugging
+    - python -m pip install --upgrade pip
+    - pip install -r requirements-run.txt
+    - echo "---Send Message to Wechat---"
+      python Wechat-Timed-Message.py
+
+retry:
+  stage: retry
+  script:
+    - curl --request POST
+      --form token=$GPATOKEN
+      --form ref=main
+      --form "variables[DELAYS]=30m"
+      "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/trigger/pipeline"
+  rules:
+    - if: $GPATOKEN != ""
+      when: on_failure

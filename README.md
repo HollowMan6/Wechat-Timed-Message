@@ -30,7 +30,7 @@
 
 [工作流存放文件夹](.github/workflows)
 
-支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab/Python后台定时调度运行](#crontab)，[Docker运行](#docker)，[Kubernetes直接运行](#kubernetes)，[使用Helm包管理在Kubernetes运行](#helm)，[Heroku部署运行](#heroku)等。
+支持[Fork本仓库直接使用工作流(推荐)](#使用方法)，[GitLab使用Pipeline](#gitlab)，[自行创建仓库使用工作流](#自行配置工作流)，[CronTab/Python后台定时调度运行](#crontab)，[Docker运行](#docker)，[Kubernetes直接运行](#kubernetes)，[使用Helm包管理在Kubernetes运行](#helm)，[Heroku部署运行](#heroku)等。
 
 [Docker镜像](https://hub.docker.com/r/hollowman6/send-message-to-wechat)支持在`amd64`、`arm64`、`arm32v7`、`arm32v6`、`arm32v5`、`ppc64le`、`s390x`、`i386`多架构(包括大型机、普通PC机以及树莓派等开发板)运行。
 
@@ -90,6 +90,28 @@
 https://github.com/HollowMan6/Wechat-Timed-Message/blob/main/.github/workflows/1.yml#L43)的`30m`替换为你想要的数值，这里的时间遵循Linux sleep 函数对应时间语法：一个数字后接 `s` 对应秒, `m` 对应分钟等。
 
 如果是因为本仓库程序本身因为失效而导致的报错，你可以取消正在运行中的工作流从而终止这一循环。
+
+## GitLab
+
+GitLab仓库地址：https://gitlab.com/HollowMan6/Wechat-Timed-Message
+
+你还可以使用GitLab的Pipeline来进行消息推送：
+
+同理，fork完GitLab仓库到你的名下后，创建Variables（类似于GitHub Actions Secrets）：
+
+![](img/gitlab_create_variable.png)
+
+![](img/gitlab_create_variable_result.png)
+
+同理，你还可以创建一个Pipeline triggers(类似于Github Access Token)并加入到Variables中来启用自动打开失败再次消息推送：
+
+![](img/gitlab_ci_triggers.png)
+
+默认再次消息推送等待时间为30分钟，如果你有需要可以修改你的fork仓库对应的[这里](.gitlab-ci.yml#L49)的`30m`替换为你想要的数值。
+
+设定schedule：
+
+![](img/schedule.png)
 
 ## 自行配置工作流
 
@@ -214,7 +236,7 @@ kubectl delete ns wechat-timed-message
 点击以上按钮部署成功后，请确保Overview中Dyno formation栏目中的clock为ON状态，如果不是请按开启：
 ![](img/Heroku.png)
 
-因为Free Dyno 30分钟会自动休眠，实测休眠时不会自动唤醒打卡，因而建议使用付费版，否则不推荐使用。
+因为Free Dyno 30分钟会自动休眠，实测休眠时不会自动唤醒消息推送，因而建议使用付费版，否则不推荐使用。
 
 **警告**：
 
@@ -232,7 +254,7 @@ Source Github Repository Link: https://github.com/HollowMan6/Wechat-Timed-Messag
 
 [Workflows](.github/workflows)
 
-Support [Fork this repository to use workflows(Recommend)](#usage)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab / Python schedule](#crontab)，[run with Docker](#docker)，[run with Kubernetes directly](#kubernetes), [Use Helm Package Manager to run in Kubernetes](#helm), [use Heroku to deploy](#heroku) etc.
+Support [Fork this repository to use workflows(Recommend)](#usage)，[GitLab using Pipeline](#gitlab)，[Self-Configure Workflow](#self-configure-workflow)，[run using CronTab / Python schedule](#crontab)，[run with Docker](#docker)，[run with Kubernetes directly](#kubernetes), [Use Helm Package Manager to run in Kubernetes](#helm), [use Heroku to deploy](#heroku) etc.
 
 [Docker Image](https://hub.docker.com/r/hollowman6/send-message-to-wechat) support running on multiple architectures such as `amd64`, `arm64`, `arm32v7`, `arm32v6`, `arm32v5`, `ppc64le`, `s390x`, `i386` including Mainframe, PC and Demoboard like Raspberry Pi.
 
@@ -292,6 +314,27 @@ https://github.com/HollowMan6/Wechat-Timed-Message/blob/main/.github/workflows/1
 
 If the error is caused by the repository program itself, you can cancel the running workflow to terminate the loop.
 
+## GitLab
+
+GitLab Repository Address：https://gitlab.com/HollowMan6/Wechat-Timed-Message
+
+You can also use GitLab's Pipeline to auto-report：
+
+In the same way, after forking the gitlab repository under your account, create Variables（similar to GitHub Actions Secrets）:
+
+![](img/gitlab_create_variable.png)
+
+![](img/gitlab_create_variable_result.png)
+
+In the same way, you can also create a Pipeline triggers (similar to Github Access Token) and add it to Variables to restart the workflow automatically in case of Auto Report in failure：
+
+![](img/gitlab_ci_triggers.png)
+
+The default waiting time is 30 minutes. You can replace `30m` [here](.gitlab-ci.yml#L49) in your corresponding repository with the time you want. 
+
+Setup schedule：
+
+![](img/schedule.png)
 
 ## Self-Configure Workflow
 

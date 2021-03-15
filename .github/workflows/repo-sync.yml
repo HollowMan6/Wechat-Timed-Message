@@ -1,0 +1,29 @@
+name: Repo Sync
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to GitLab
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        with:
+          source-repo: git@github.com:${{ github.repository }}.git
+          destination-repo: git@gitlab.com:${{ github.repository }}.git
+
+  gitee:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sync to Gitee
+      uses: wearerequired/git-mirror-action@master
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        source-repo: git@github.com:${{ github.repository }}.git
+        destination-repo: git@gitee.com:${{ github.repository }}.git
