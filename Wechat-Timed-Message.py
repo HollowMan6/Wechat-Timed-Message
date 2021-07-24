@@ -87,7 +87,7 @@ if sckey:
         host = "https://sctapi.ftqq.com/"
         title = urllib.parse.quote_plus(title.replace('\n', '\n\n'))
         message = urllib.parse.quote_plus(message.replace('\n', '\n\n'))
-        res = requests.get(host + sckey + ".send?text=" + title +
+        res = requests.get(host + sckey + ".send?title=" + title +
                             "&desp=" + message)
         result = json.loads(res.text)
         if result['data']['errno'] == 0:
