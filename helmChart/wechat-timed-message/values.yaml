@@ -8,9 +8,13 @@ schedule: "0 2 21 * *"
 
 # Optional data and settings
 serverChanSCKey: ""
-openID: ""
 ppToken: ""
 ppTopic: ""
+content: ""
+image: ""
+corpID: ""
+corpSecret: ""
+agentID: ""
 failureDelayTime: "30m"
 failedJobsHistoryLimit: 1
 successfulJobsHistoryLimit: 3

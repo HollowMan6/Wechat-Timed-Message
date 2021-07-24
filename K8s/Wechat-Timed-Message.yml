@@ -41,11 +41,6 @@ spec:
                   secretKeyRef:
                     name: wechat-timed-message-secrets
                     key: serverchansckey
-              - name: OPENID
-                valueFrom:
-                  secretKeyRef:
-                    name: wechat-timed-message-secrets
-                    key: openid
               - name: PPTOKEN
                 valueFrom:
                   secretKeyRef:
@@ -56,6 +51,31 @@ spec:
                   secretKeyRef:
                     name: wechat-timed-message-secrets
                     key: pptopic
+              - name: CONTENT
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-timed-message-secrets
+                    key: content
+              - name: IMAGE
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-timed-message-secrets
+                    key: image
+              - name: CORPID
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-timed-message-secrets
+                    key: corpid
+              - name: CORPSECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-timed-message-secrets
+                    key: corpsecret
+              - name: AGENTID
+                valueFrom:
+                  secretKeyRef:
+                    name: wechat-timed-message-secrets
+                    key: agentid
             volumeMounts:
             - mountPath: /cache
               name: send-delays-marking

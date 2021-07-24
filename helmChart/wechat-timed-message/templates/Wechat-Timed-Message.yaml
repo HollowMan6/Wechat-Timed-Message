@@ -56,11 +56,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.name }}-secrets
                   key: serverchansckey
-            - name: OPENID
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.name }}-secrets
-                  key: openid
             - name: PPTOKEN
               valueFrom:
                 secretKeyRef:
@@ -71,6 +66,31 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.name }}-secrets
                   key: pptopic
+            - name: CONTENT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: content
+            - name: IMAGE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: image
+            - name: CORPID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: corpid
+            - name: CORPSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: corpsecret
+            - name: AGENTID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}-secrets
+                  key: agentid
             {{- with .Values.env }}
 {{ toYaml . | indent 12 }}
             {{- end }}
@@ -138,9 +158,13 @@ stringData:
   title: {{ .Values.title | quote }}
   msg: {{ .Values.message | quote }}
   serverchansckey: {{ .Values.serverChanSCKey | quote }}
-  openid: {{ .Values.openID | quote }}
   pptoken: {{ .Values.ppToken | quote }}
   pptopic: {{ .Values.ppTopic | quote }}
+  content: {{ .Values.content | quote }}
+  image: {{ .Values.image | quote }}
+  corpid: {{ .Values.corpID | quote }}
+  corpsecret: {{ .Values.corpSecret | quote }}
+  agentid: {{ .Values.agentID | quote }}
   {{- with .Values.secret }}
 {{ toYaml . | indent 2 }}
   {{- end }}

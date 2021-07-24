@@ -18,11 +18,15 @@ jobs:
           with:
             DELAYS: ${{ github.event.inputs.delays }}
             SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
-            OPENID: ${{ secrets.OPENID }}
             PPTOKEN: ${{ secrets.PPTOKEN }}
             PPTOPIC: ${{ secrets.PPTOPIC }}
             TITLE: ${{ secrets.TITLE }}
             MSG: ${{ secrets.MSG }}
+            CONTENT: ${{ secrets.CONTENT }}
+            IMAGE: ${{ secrets.IMAGE }}
+            CORPID: ${{ secrets.CORPID }}
+            CORPSECRET: ${{ secrets.CORPSECRET }}
+            AGENTID: ${{ secrets.AGENTID }}
         - name: 'Re-run workflow if failed and GPATOKEN set'
           if: ${{ failure() }}
           run: |

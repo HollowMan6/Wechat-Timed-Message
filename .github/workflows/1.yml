@@ -25,11 +25,15 @@ jobs:
         - name: 'Send Timed Message to Wechat'
           env:
             SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
-            OPENID: ${{ secrets.OPENID }}
             PPTOKEN: ${{ secrets.PPTOKEN }}
             PPTOPIC: ${{ secrets.PPTOPIC }}
             TITLE: ${{ secrets[format('TITLE{0}', github.workflow)] }}
             MSG: ${{ secrets[format('MSG{0}', github.workflow)] }}
+            CONTENT: ${{ secrets[format('CONTENT{0}', github.workflow)] }}
+            IMAGE: ${{ secrets[format('IMAGE{0}', github.workflow)] }}
+            CORPID: ${{ secrets.CORPID }}
+            CORPSECRET: ${{ secrets.CORPSECRET }}
+            AGENTID: ${{ secrets.AGENTID }}
           run: python Wechat-Timed-Message.py
         - name: 'Re-run workflow if failed and GPATOKEN set'
           if: ${{ failure() }}

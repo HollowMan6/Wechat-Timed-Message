@@ -50,25 +50,26 @@
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
-### ~~Server酱~~
+#### 企业微信推送 
 
-***注: 因为微信发布公告将在2021年4月底下线模板消息，Server酱开发了以企业微信为主的多通道新版（Turbo版 sct.ftqq.com）。旧版将在4月后下线***
+1. 首先注册[企业微信](https://work.weixin.qq.com/wework_admin/loginpage_wx)。
+2. 注册成功后，获取企业id，创建一个Name为`CORPID`，value为您的企业id值的Actions secret。
+![](img/wecomid.png)
+3. 选择`应用管理` → `应用` → `创建应用`
+![](img/wecom_create_apps.png)
+4. 自己创建完成后获取Secret和AgentId，创建分别Name为`CORPSECRET`和`AGENTID`，value为这些值的Actions secret。
+![](img/wecom_apps.png)
+5. 进入`我的企业` → `微信插件`，拉到下边扫描二维码，关注以后即可收到推送的消息。
+![](img/wecom_wechat.png)
 
-如使用[Server酱](http://sc.ftqq.com/)来实现，它的配置方法请参考其说明文档。
+效果示意:
+![](img/wecom.jpg)
+![](img/wecom_content.jpg)
+[示例内容](https://open.work.weixin.qq.com/wwopen/mpnews?mixuin=pHhNDQAABwCobsHiAAAUAA&mfid=WW0324-8tTQjQAABwBCZs6oZBo1yA3mwAO57&idx=0&sn=4f42d0909560e8b42dd756d0ac1b04b6)
 
-然后，你只需要创建一个Name为`SERVERCHANSCKEY`，value为[你的SCKEY调用代码值](http://sc.ftqq.com/?c=code)的Actions secret即可自动让仓库的工作流通过Server酱为你推送消息。
+### Server酱
 
-### ~~Server酱测试号版~~
-
-***注: 因为微信发布公告将在2021年4月底下线模板消息，Server酱开发了以企业微信为主的多通道新版（Turbo版 sct.ftqq.com）。旧版将在4月后下线***
-
-如果要使用[Server酱测试号版](https://sct.ftqq.com/)，请创建一个/修改Name为`SERVERCHANSCKEY`，value为[你的SendKey值](https://sct.ftqq.com/sendkey)的Actions secret。另外创建一个Name为`OPENID`的Actions secret，如果value值为`0`则是通过公众号仅发给自己。否则将value值设定为关注你测试公众号的那个用户的微信号openid，这时将发给自己的同时还会发送给那个指定用户。
-
-如果需要转换回普通的Sever酱请将`OPENID` Actions secret删除即可。
-
-### Server酱Turbo版
-
-按照[Server酱Turbo版](https://sct.ftqq.com/)教程在他们平台上企业微信配置成功之后，同Server酱测试号版处描述操作之后，然后只需要将`OPENID` value值置为`0`即可正常使用企业微信推送消息啦。
+如果要使用[Server酱](https://sct.ftqq.com/)，请创建一个/修改Name为`SERVERCHANSCKEY`，value为[你的SendKey值](https://sct.ftqq.com/sendkey)的Actions secret。
 
 ---
 
@@ -128,9 +129,13 @@ GitLab仓库地址：https://gitlab.com/HollowMan6/Wechat-Timed-Message
 * MSG: 消息主体
 * DELAYS: 设置发送消息时间延迟
 * SERVERCHANSCKEY: Server酱 SCKEY
-* OPENID: Server酱测试号版 微信公众号用户OpenID
 * PPTOKEN: PushPlus Token
 * PPTOPIC: PushPlus 群组编码
+* CONTENT: 企业微信推送详细信息内容（必须和IMAGE同时存在）
+* IMAGE: 企业微信推送要使用的图片（必须和CONTENT同时存在）
+* CORPID: Wecom Corporation ID
+* CORPSECRET: Wecom Corporation App Secret
+* AGENTID: Wecom Corporation App Agent ID
 
 ### 示例
 
@@ -140,11 +145,15 @@ GitLab仓库地址：https://gitlab.com/HollowMan6/Wechat-Timed-Message
   with:
     DELAYS: ${{ github.event.inputs.delays }}
     SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
-    OPENID: ${{ secrets.OPENID }}
     PPTOKEN: ${{ secrets.PPTOKEN }}
     PPTOPIC: ${{ secrets.PPTOPIC }}
     TITLE: ${{ secrets.TITLE }}
     MSG: ${{ secrets.MSG }}
+    CONTENT: ${{ secrets.CONTENT }}
+    IMAGE: ${{ secrets.IMAGE }}
+    CORPID: ${{ secrets.CORPID }}
+    CORPSECRET: ${{ secrets.CORPSECRET }}
+    AGENTID: ${{ secrets.AGENTID }}
 ```
 
 ## Docker
@@ -158,9 +167,13 @@ docker run -it \
     -e MSG="$MSG" \
     -e DELAYS=$DELAYS \
     -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
-    -e OPENID=$OPENID \
     -e PPTOKEN=$PPTOKEN \
     -e PPTOPIC=$PPTOPIC \
+    -e CONTENT=$CONTENT \
+    -e IMAGE=$IMAGE \
+    -e CORPID=$CORPID \
+    -e CORPSECRET=$CORPSECRET \
+    -e AGENTID=$AGENTID \
     hollowman6/send-message-to-wechat
 ```
 
@@ -274,25 +287,26 @@ If you need to push the related information to multiple Wechat accounts, that is
 
 ![](https://pushplus.hxtrip.com/doc/img/c1.png)
 
-### ~~ServerChan~~
+#### Wecom push by Wechat 
 
-***Note: because wechat announced that its template message will be offline at the end of April 2021, ServerChan have developed a new multi-channel Version (turbo version https://sct.ftqq.com) based on enterprise wechat. The old version will go offline in April***
+1. First register [Wecom](https://work.weixin.qq.com/wework_admin/loginpage_wx).
+2. After successful registration, obtain the Company ID and create an actions secret with the name of `CORPID` and the value of your Company ID.
+![](img/wecomid.png)
+3. Select `App Management` → `Apps` → `Create an app`.
+![](img/wecom_create_apps.png)
+1. After the creation, obtain the secret and AgentId, and create actions secret with the name of `CORPSECRET` and `AGENTID` and the value of these values respectively. 
+![](img/wecom_apps.png)
+1. Enter `My Company` → `WeChat Workplace`, pull to the bottom and scan the QR code. After following, you can receive the push message.
+![](img/wecom_wechat.png)
 
-We Use [Server Chan](http://sc.ftqq.com/) to realize its functionality. For its configuration method, please refer to its documentation (In Chinese).
+Demo:
+![](img/wecom.jpg)
+![](img/wecom_content.jpg)
+[Example Content](https://open.work.weixin.qq.com/wwopen/mpnews?mixuin=pHhNDQAABwCobsHiAAAUAA&mfid=WW0324-8tTQjQAABwBCZs6oZBo1yA3mwAO57&idx=0&sn=4f42d0909560e8b42dd756d0ac1b04b6)
 
-Then, you just need to create an Actions Secret whose name is `SERVERCHANSCKEY` and value is [Your SCKEY](http://sc.ftqq.com/?c=code). Then the workflow can automatically push the relevant information for you.
+### ServerChan
 
-### ~~ServerChan Testing Subscription Version~~
-
-***Note: because wechat announced that its template message will be offline at the end of April 2021, ServerChan have developed a new multi-channel Version (turbo version https://sct.ftqq.com) based on enterprise wechat. The old version will go offline in April***
-
-If you want to use [ServerChan Testing Subscription Version](https://sct.ftqq.com/), please create/modify the Actions secret with the Name `SERVERCHANSCKEY` and the value [your sendkey value](https://sct.ftqq.com/sendkey). In addition, create a Actions secret with Name as `OPENID`, if the value is `0`, it is only send to yourself. Otherwise, set the value to be the specified user's Wechat openid who subscribed the Testing Subscription account, then it will send it to the designated user and yourself at the same time.
-
-If you need to switch back to normal SeverChan, please delete the `OPENID` actions secret.
-
-### ServerChan Turbo Version
-
-According to [ServerChan Turbo Version](https://sct.ftqq.com/) tutorial, configuring Enterprise Wechat message pushing on their platform, then after doing the same actions as the tutorial describes in the ServerChan Testing Subscription Version part, you just need to set the `openid` value to `0` so that this way can be functional.
+If you want to use [ServerChan](https://sct.ftqq.com/), please create/modify the Actions secret with the Name `SERVERCHANSCKEY` and the value [your sendkey value](https://sct.ftqq.com/sendkey).
 
 ---
 
@@ -350,9 +364,13 @@ You can create your own repository and configure your own workflow to use, [Exam
 
 * MSG: Your Message Content
 * SERVERCHANSCKEY: ServerChan SCKEY
-* OPENID: ServerChan Testing Subscription Version Testing Subscription account User OpenID
 * PPTOKEN: PushPlus Token
 * PPTOPIC: PushPlus Topic
+* CONTENT: Wecom Push Detailed Content (Must Coexist with IMAGE)
+* IMAGE: Wecom Push Cover Image (Must Coexist with CONTENT)
+* CORPID: Wecom Corporation ID
+* CORPSECRET: Wecom Corporation App Secret
+* AGENTID: Wecom Corporation App Agent ID
 
 ### Example
 
@@ -362,11 +380,15 @@ You can create your own repository and configure your own workflow to use, [Exam
   with:
     DELAYS: ${{ github.event.inputs.delays }}
     SERVERCHANSCKEY: ${{ secrets.SERVERCHANSCKEY }}
-    OPENID: ${{ secrets.OPENID }}
     PPTOKEN: ${{ secrets.PPTOKEN }}
     PPTOPIC: ${{ secrets.PPTOPIC }}
     TITLE: ${{ secrets.TITLE }}
     MSG: ${{ secrets.MSG }}
+    CONTENT: ${{ secrets.CONTENT }}
+    IMAGE: ${{ secrets.IMAGE }}
+    CORPID: ${{ secrets.CORPID }}
+    CORPSECRET: ${{ secrets.CORPSECRET }}
+    AGENTID: ${{ secrets.AGENTID }}
 ```
 
 ## Docker
@@ -381,9 +403,13 @@ docker run -it \
     -e MSG="$MSG" \
     -e DELAYS=$DELAYS \
     -e SERVERCHANSCKEY=$SERVERCHANSCKEY \
-    -e OPENID=$OPENID \
     -e PPTOKEN=$PPTOKEN \
     -e PPTOPIC=$PPTOPIC \
+    -e CONTENT=$CONTENT \
+    -e IMAGE=$IMAGE \
+    -e CORPID=$CORPID \
+    -e CORPSECRET=$CORPSECRET \
+    -e AGENTID=$AGENTID \
     hollowman6/send-message-to-wechat
 ```
 

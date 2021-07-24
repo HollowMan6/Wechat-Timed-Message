@@ -5,11 +5,15 @@ variables:
   MSG: ""
   TITLE: ""
   SERVERCHANSCKEY: ""
-  OPENID: ""
   PPTOKEN: ""
   PPTOPIC: ""
   DELAYS: ""
   GPATOKEN: ""
+  CONTENT: ""
+  IMAGE: ""
+  CORPID: ""
+  CORPSECRET: ""
+  AGENTID: ""
 
 stages:
   - wait

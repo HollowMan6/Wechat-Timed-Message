@@ -34,8 +34,23 @@ if [ -f "tmpm" ]; then
 else
     command=$command" --from-literal=msg="
 fi
+echo "-content(Empty line to end):"
+while read content
+do
+    if [ -z "$content" ]
+    then
+        break
+    else
+        echo "$content" >> tmpm
+    fi
+done
+if [ -f "tmpm" ]; then
+    command=$command" --from-file=content=tmpm"
+else
+    command=$command" --from-literal=content="
+fi
 
-secrets=("serverchansckey" "openid" "pptoken" "pptopic")
+secrets=("serverchansckey" "pptoken" "pptopic" "image" "corpid" "corpsecret" "agentid")
 for secret in ${secrets[*]}
 do
     read -p "-"$secret": " content
