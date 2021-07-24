@@ -9,7 +9,10 @@ LABEL maintainer="Hollow Man <hollowman@hollowman.ml>"
 
 COPY entrypoint.sh /entrypoint.sh
 COPY Wechat-Timed-Message.py /Wechat-Timed-Message.py
+COPY requirements.txt /requirements.txt
 
 RUN chmod +x /entrypoint.sh
+RUN pip install --upgrade --no-cache-dir pip && \
+    pip install --no-cache-dir -r /requirements.txt
 
 ENTRYPOINT ["/entrypoint.sh"]
