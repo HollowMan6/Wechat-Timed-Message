@@ -29,20 +29,23 @@ def exwechat_get_access_token():
         'corpid': corpid,
         'corpsecret': corpsecret
     }
-    req = urllib.request.Request(url, data=str(json.dumps(params)).encode('utf-8'))
-    resp = urllib.request.urlopen(req)
-    resp_json = json.loads(resp.read())
+    resp = requests.get(url, params=params)
+    resp.raise_for_status()
+    resp_json = resp.json()
     if 'access_token' in resp_json.keys():
         return resp_json['access_token']
     else:
         raise Exception('请检查CORPID和CORPSECRET是否正确！\n' + resp.text)
 
 def exwechat_get_ShortTimeMedia(img_url):
-    media_url = f'https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token={access_token}&type=file'
-    f = open(img_url, "rb").read()
-    req = urllib.request.Request(media_url, data=str(json.dumps({'file': f})).encode('utf-8'))
-    resp = urllib.request.urlopen(req)
-    return json.loads(resp.read())['media_id']
+    if img_url:
+        media_url = f'https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token={access_token}&type=file'
+        f = requests.get(img_url).content
+        r = requests.post(media_url, files={'file': f}, json=True)
+        print(r.json())
+        return r.json()['media_id']
+    else:
+        return ""
 
 
 def exwechat_send(title, digest, content):
@@ -55,7 +58,7 @@ def exwechat_send(title, digest, content):
         "enable_duplicate_check": 0,
         "duplicate_check_interval": 1800
     }
-    if content and image:
+    if content:
         data["msgtype"] = 'mpnews'
         data["mpnews"] = {
             "articles": [
@@ -75,23 +78,22 @@ def exwechat_send(title, digest, content):
             "title": title,
             "description": digest,
             "url": "https://github.com/HollowMan6/Wechat-Timed-Message/actions"}
-    req = urllib.request.Request(url, data=str(json.dumps(data)).encode('utf-8'))
-    resp = urllib.request.urlopen(req)
-    return json.loads(resp.read())
+    resp = requests.post(url, data=json.dumps(data))
+    resp.raise_for_status()
+    return resp
 
 if sckey:
     try:
         host = "https://sctapi.ftqq.com/"
         title = urllib.parse.quote_plus(title.replace('\n', '\n\n'))
         message = urllib.parse.quote_plus(message.replace('\n', '\n\n'))
-        res = urllib.request.urlopen(host + sckey + ".send?text=" + title +
+        res = requests.get(host + sckey + ".send?text=" + title +
                             "&desp=" + message)
-        response = res.read().decode('utf-8')
-        result = json.loads(response)
+        result = json.loads(res.text)
         if result['data']['errno'] == 0:
             print("Server酱推送成功!")
         else:
-            errorNotify += "Server酱推送错误: " + response + "\n"
+            errorNotify += "Server酱推送错误: " + result + "\n"
     except Exception as e:
         print(e)
         errorNotify += "Server酱推送错误!\n"
@@ -107,14 +109,13 @@ if pptoken:
             title = ""
         title = urllib.parse.quote_plus(title.replace('\n', '<br>'))
         message = urllib.parse.quote_plus(message.replace('\n', '<br>'))
-        res = urllib.request.urlopen(host + "send?token=" + pptoken + "&title=" + title +
+        res = requests.get(host + "send?token=" + pptoken + "&title=" + title +
                             "&content=" + message + "&template=html&topic=" + pptopic)
-        response = res.read().decode('utf-8')
-        result = json.loads(response)
+        result = res.json()
         if result['code'] == 200:
             print("成功通过PushPlus将结果通知给相关用户!")
         else:
-            errorNotify += "PushPlus推送错误: " + response + "\n"
+            errorNotify += "PushPlus推送错误: " + result + "\n"
     except Exception as e:
         print(e)
         errorNotify += "PushPlus推送错误!\n"
@@ -128,7 +129,7 @@ if corpid:
             try:
                 access_token = exwechat_get_access_token()
                 res = exwechat_send(title, message, content)
-                result = res
+                result = res.json()
                 if result['errcode'] == 0:
                     print("成功通过企业微信将结果通知给用户!")
                 else:
