@@ -100,6 +100,9 @@ if sckey:
 else:
     print("未设置SERVERCHANSCKEY，尝试使用PushPlus...")
 
+title = os.environ['TITLE']
+message = os.environ['MSG']
+
 if pptoken:
     try:
         host = "http://pushplus.hxtrip.com/"
@@ -121,6 +124,9 @@ if pptoken:
         errorNotify += "PushPlus推送错误!\n"
 else:
     print("未设置PPTOKEN！")
+
+title = os.environ['TITLE']
+message = os.environ['MSG']
 
 if corpid:
     info = ""
