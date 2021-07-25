@@ -4,13 +4,13 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: wechat-timed-message
-          image: hollowman6/send-message-to-wechat:1.1.2
+          image: hollowman6/send-message-to-wechat:1.1.3
       artifacthub.io/license: GPL-3.0
     apiVersion: v2
-    appVersion: 1.1.2
-    created: "2021-07-25T00:33:49.0511124+08:00"
+    appVersion: 1.1.3
+    created: "2021-07-25T11:00:31.5470156+08:00"
     description: A chart for send timed message to Wechat. (向微信推送定时消息)
-    digest: 574b40002d4719bd50795f37ca7b52f070c491d317a869f53972f68ca56fabf3
+    digest: 6cd1dce2dd2385cd146a50c90030be694afbeea7d6a1e97a90151c963e721e81
     home: https://hollowman.ml/
     icon: https://avatars.githubusercontent.com/u/67548465?s=200&v=4
     keywords:
@@ -24,8 +24,8 @@ entries:
     - https://github.com/HollowMan6/Wechat-Timed-Message
     type: application
     urls:
-    - helmChart/wechat-timed-message-1.1.2.tgz
-    version: 1.1.2
+    - helmChart/wechat-timed-message-1.1.3.tgz
+    version: 1.1.3
   - annotations:
       artifacthub.io/images: |
         - name: wechat-timed-message
@@ -33,7 +33,7 @@ entries:
       artifacthub.io/license: GPL-3.0
     apiVersion: v2
     appVersion: 1.0.9
-    created: "2021-07-25T00:33:49.0501151+08:00"
+    created: "2021-07-25T11:00:31.5460187+08:00"
     description: A chart for send timed message to Wechat. (向微信推送定时消息)
     digest: b91fef07ee30578da56c4ef1850e2efc463faada664e5603fddc60f1ffcf0e32
     home: https://hollowman.ml/
@@ -58,7 +58,7 @@ entries:
       artifacthub.io/license: GPL-3.0
     apiVersion: v2
     appVersion: 1.0.8
-    created: "2021-07-25T00:33:49.0501151+08:00"
+    created: "2021-07-25T11:00:31.5330501+08:00"
     description: A chart for send timed message to Wechat. (向微信推送定时消息)
     digest: a2d9549840df9c91e3b8615e9e764422094b9dc5a32f47621c0a0469811227a8
     home: https://hollowman.ml/
@@ -83,7 +83,7 @@ entries:
       artifacthub.io/license: GPL-3.0
     apiVersion: v2
     appVersion: 1.0.7
-    created: "2021-07-25T00:33:49.0491178+08:00"
+    created: "2021-07-25T11:00:31.517121+08:00"
     description: A chart for send timed message to Wechat. (向微信推送定时消息)
     digest: eead54d089562a7a9719bf3dc3e98729514f3fd38a331d09a97f9336dd9dc445
     home: https://hollowman.ml/
@@ -101,4 +101,4 @@ entries:
     urls:
     - helmChart/wechat-timed-message-1.0.7.tgz
     version: 1.0.7
-generated: "2021-07-25T00:33:49.0481207+08:00"
+generated: "2021-07-25T11:00:31.4921693+08:00"
