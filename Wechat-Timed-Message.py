@@ -133,8 +133,6 @@ if corpid:
         if agentid:
             try:
                 access_token = exwechat_get_access_token()
-                title = title.replace('\n', '<br>')
-                message = message.replace('\n', '<br>')
                 content = content.replace('\n', '<br>')
                 res = exwechat_send(title, message, content)
                 result = res.json()
