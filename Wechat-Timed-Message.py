@@ -42,7 +42,6 @@ def exwechat_get_ShortTimeMedia(img_url):
         media_url = f'https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token={access_token}&type=file'
         f = requests.get(img_url).content
         r = requests.post(media_url, files={'file': f}, json=True)
-        print(r.json())
         return r.json()['media_id']
     else:
         return ""
