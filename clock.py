@@ -12,10 +12,11 @@ def job_function():
     if os.system("python Wechat-Timed-Message.py") != 0:
         failure = True
     delays = os.environ['DELAYS']
-    os.system("rm information.txt")
     if failure and delays:
         os.system("echo 'Sleep for " + delays +
                   " and the message will be sent again!'")
+        os.system("echo Sleep for " + delays +
+                  " and the message will be sent again! >> logs.txt")
         os.system("sleep " + delays)
         job_function()
 
