@@ -86,4 +86,4 @@ jobs:
           fi
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION                       
-          docker buildx build -t $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --push .
+          docker buildx build -t $IMAGE_ID:$VERSION --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6,linux/mips64le --push .
