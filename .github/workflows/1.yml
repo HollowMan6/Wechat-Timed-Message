@@ -1,4 +1,5 @@
 name: '1' # change here for `name`
+concurrency: report-${{ github.ref }}
 
 on:
   workflow_dispatch:

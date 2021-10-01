@@ -1,5 +1,6 @@
 name: 'Docker Version - 1'
-    
+concurrency: docker-report-${{ github.ref }}
+
 on:
   workflow_dispatch:  # Allow manual triggers
     inputs:

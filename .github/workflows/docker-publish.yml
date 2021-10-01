@@ -1,4 +1,7 @@
 name: Docker
+concurrency: 
+  group: docker-${{ github.head_ref }}
+  cancel-in-progress: true
 
 on:
   workflow_dispatch:  # Allow manual triggers
