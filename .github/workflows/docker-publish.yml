@@ -27,7 +27,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+    if: github.event.repository.owner.login == "HollowMan6"
     steps:
       - name: Checkout
         uses: actions/checkout@main
