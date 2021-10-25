@@ -8,7 +8,7 @@ on:
 jobs:
   gitee:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.login == "HollowMan6"
+    if: github.event.repository.owner.login == 'HollowMan6'
     steps:
     - name: Sync to Gitee
       uses: wearerequired/git-mirror-action@master
