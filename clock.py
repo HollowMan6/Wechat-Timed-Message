@@ -4,21 +4,8 @@
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
+from job import job_function
 import os
-
-
-def job_function():
-    failure = False
-    if os.system("python Wechat-Timed-Message.py") != 0:
-        failure = True
-    delays = os.environ['DELAYS']
-    if failure and delays:
-        os.system("echo 'Sleep for " + delays +
-                  " and the message will be sent again!'")
-        os.system("echo Sleep for " + delays +
-                  " and the message will be sent again! >> logs.txt")
-        os.system("sleep " + delays)
-        job_function()
 
 
 sched = BlockingScheduler()
