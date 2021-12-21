@@ -20,7 +20,7 @@ def job_function():
         os.system("timeout " + delays)
         job_function()
 
-
-sched = BlockingScheduler()
-sched.add_job(job_function, CronTrigger.from_crontab(os.environ['CRONEXP']))
-sched.start()
+if __name__ == "__main__":
+    sched = BlockingScheduler()
+    sched.add_job(job_function, CronTrigger.from_crontab(os.environ['CRONEXP']))
+    sched.start()
