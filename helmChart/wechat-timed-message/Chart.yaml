@@ -13,7 +13,7 @@ sources:
   - "https://github.com/HollowMan6/Wechat-Timed-Message"
 maintainers:
   - name: Hollow Man
-    email: hollowman@hollowman.ml
+    email: hollowman@opensuse.org
 annotations:
   artifacthub.io/images: |
     - name: wechat-timed-message
