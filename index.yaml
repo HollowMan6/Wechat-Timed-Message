@@ -17,7 +17,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
@@ -42,7 +42,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
@@ -67,7 +67,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
@@ -92,7 +92,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
@@ -117,7 +117,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
@@ -142,7 +142,7 @@ entries:
     - wechat
     - timed-message
     maintainers:
-    - email: hollowman@hollowman.ml
+    - email: hollowman@opensuse.org
       name: Hollow Man
     name: wechat-timed-message
     sources:
